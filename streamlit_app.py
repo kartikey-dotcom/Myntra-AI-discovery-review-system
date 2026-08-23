@@ -625,6 +625,43 @@ with tab_matrix:
     st.caption("Mathematical Ranking Formula: **Opportunity Score = Frequency (%) × Severity (1-5) × Solvability (1-5)**")
 
     if dynamic_matrix:
+        # Strategic 2D Quadrant Scatter Plot
+        st.markdown("#### 🧭 Strategic Prioritization Quadrant (Solvability vs. Severity)")
+        st.caption("Bubble Size = Frequency Share (%) • Color Intensity = Opportunity Score")
+        
+        quad_data = []
+        for row in dynamic_matrix:
+            quad_data.append({
+                "Friction Barrier": row.get("friction_name", "").title(),
+                "Product Solvability (1-5)": row.get("solvability_score", 0),
+                "Severity Score (1-5)": row.get("severity_score", 0),
+                "Frequency Share (%)": row.get("frequency_pct", 0),
+                "Opportunity Score": row.get("opportunity_score", 0),
+                "Recommended Solution": row.get("recommended_solution", "")
+            })
+        df_quad = pd.DataFrame(quad_data)
+        
+        if not df_quad.empty:
+            fig_quad = px.scatter(
+                df_quad,
+                x="Product Solvability (1-5)",
+                y="Severity Score (1-5)",
+                size="Frequency Share (%)",
+                color="Opportunity Score",
+                hover_name="Friction Barrier",
+                text="Friction Barrier",
+                color_continuous_scale=["#e07a5f", "#c85a32"],
+                size_max=32,
+                range_x=[3.4, 5.2],
+                range_y=[3.4, 5.0]
+            )
+            fig_quad.add_hline(y=4.2, line_dash="dot", line_color="#d4a373", annotation_text="High Severity (>4.2)")
+            fig_quad.add_vline(x=4.2, line_dash="dot", line_color="#d4a373", annotation_text="High Solvability (>4.2)")
+            fig_quad.update_traces(textposition="top center")
+            fig_quad.update_layout(height=380, margin=dict(l=20, r=20, t=30, b=20))
+            st.plotly_chart(fig_quad, use_container_width=True)
+
+        st.markdown("#### 📋 Prioritized Opportunity Scoreboard")
         matrix_table = []
         for idx, row in enumerate(dynamic_matrix, 1):
             matrix_table.append({
@@ -708,7 +745,25 @@ with tab_insights:
         fig_curve.add_vline(x=48, line_dash="dash", line_color="#c85a32", annotation_text="Critical Intercept Window (<48h)")
         st.plotly_chart(fig_curve, use_container_width=True)
 
-        st.info("💡 **Key PM Takeaway**: After 48 hours, conviction drops below 30%. Visual & UX product features (such as automated outfit pairability suggestions) must trigger inside the initial 24–48 hour window.")
+        st.info("💡 **Key PM Takeaway**: After 48 hours, conviction drops below 30%. Visual & UX product features must trigger inside the initial 24–48 hour window.")
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("#### 🧬 Cohort vs. Friction Density Correlation Matrix (%)")
+    heatmap_data = [
+        {"Cohort": "Student / Gen Z", "Styling Anxiety": 48.1, "Fit Ambiguity": 24.1, "Fabric Doubt": 20.0, "Social Lag": 9.8, "Comparison Paralysis": 3.9},
+        {"Cohort": "Working Professional", "Styling Anxiety": 37.0, "Fit Ambiguity": 25.3, "Fabric Doubt": 34.2, "Social Lag": 9.4, "Comparison Paralysis": 3.4},
+        {"Cohort": "Tier-2 Aspirational", "Styling Anxiety": 37.9, "Fit Ambiguity": 41.5, "Fabric Doubt": 21.8, "Social Lag": 8.2, "Comparison Paralysis": 4.4}
+    ]
+    df_hm = pd.DataFrame(heatmap_data).set_index("Cohort")
+    fig_hm = px.imshow(
+        df_hm,
+        text_auto=True,
+        aspect="auto",
+        color_continuous_scale=["#faf8f5", "#f4dfd8", "#c85a32"],
+        title="Friction Density (%) Across Target User Cohorts"
+    )
+    fig_hm.update_layout(height=230, margin=dict(l=10, r=10, t=40, b=10))
+    st.plotly_chart(fig_hm, use_container_width=True)
 
 # -------------------------------------------------------------------------------------------------
 # TAB 4: VOC VERBATIM EXPLORER
