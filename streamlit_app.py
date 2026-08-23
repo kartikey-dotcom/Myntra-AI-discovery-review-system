@@ -152,58 +152,75 @@ st.markdown("""
         color: #8c7d73;
     }
 
-    /* Sidebar Branding & Badges */
-    .sidebar-brand {
+    /* Enhanced Tab Navigation */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background-color: #efe8df;
+        padding: 6px;
+        border-radius: 12px;
+        border: 1px solid #e2dacd;
+        margin-bottom: 20px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 44px;
+        white-space: pre-wrap;
+        background-color: transparent;
+        border-radius: 8px;
+        color: #7d6e65;
+        font-size: 13.5px;
+        font-weight: 700;
+        padding: 8px 18px;
+        border: none;
+        transition: all 0.2s ease;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        color: #c85a32;
+        background-color: rgba(255,255,255,0.4);
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #ffffff !important;
+        color: #c85a32 !important;
+        box-shadow: 0 3px 10px rgba(40, 30, 25, 0.08);
+        border: 1px solid #e0d6c8;
+    }
+
+    /* Workaround Cards */
+    .workaround-card {
+        background: #ffffff;
+        border: 1px solid #e7dfd4;
+        border-radius: 10px;
+        padding: 16px;
+        height: 100%;
+        box-shadow: 0 2px 8px rgba(40,30,25,0.03);
+        transition: transform 0.2s ease;
+    }
+    .workaround-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(40,30,25,0.06);
+    }
+    .workaround-header {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 12px;
-    }
-    .sidebar-logo-text {
-        font-size: 21px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        color: #c85a32;
-        margin: 0;
-    }
-    .sidebar-subtitle {
-        font-size: 12px;
-        font-weight: 600;
-        color: #7d6e65;
-        margin-top: -2px;
-        margin-bottom: 10px;
-    }
-    .sidebar-badge-container {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+        justify-content: space-between;
         margin-bottom: 8px;
     }
-    .badge-pill-sidebar {
-        background: rgba(200, 90, 50, 0.1);
-        color: #c85a32;
-        border: 1px solid rgba(200, 90, 50, 0.25);
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11.5px;
+    .workaround-title {
+        font-size: 13.5px;
         font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        width: fit-content;
+        color: #201a18;
     }
-    .badge-green-sidebar {
-        background: rgba(42, 157, 143, 0.12);
-        color: #2a9d8f;
-        border: 1px solid rgba(42, 157, 143, 0.3);
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11.5px;
-        font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        width: fit-content;
+    .workaround-badge {
+        background: #f4ede3;
+        color: #c85a32;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 800;
+    }
+    .workaround-desc {
+        font-size: 12px;
+        color: #6d5e54;
+        line-height: 1.45;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -522,7 +539,7 @@ with tab_overview:
             card1_sub = f"<span>🎯</span> Active <b>{segment_label}</b> Scope"
 
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #c85a32;">
             <div class="kpi-label">{card1_label}</div>
             <div class="kpi-val">{card1_val}</div>
             <div class="kpi-sub">{card1_sub}</div>
@@ -530,27 +547,27 @@ with tab_overview:
         """, unsafe_allow_html=True)
     with col2:
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #2a9d8f;">
             <div class="kpi-label">GENUINE PURCHASE INTENT</div>
-            <div class="kpi-val" style="color: #10b981;">{genuine_pct}%</div>
+            <div class="kpi-val" style="color: #2a9d8f;">{genuine_pct}%</div>
             <div class="kpi-sub"><span>🎯</span> High-conviction users</div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #e07a5f;">
             <div class="kpi-label">#1 ROOT FRICTION</div>
-            <div class="kpi-val" style="color: #ff3f6c; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
+            <div class="kpi-val" style="color: #c85a32; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
             <div class="kpi-sub"><span>⚠️</span> <b>{top_friction_pct}%</b> of cohort deliberations</div>
         </div>
         """, unsafe_allow_html=True)
     with col4:
         top_sol_title = dynamic_matrix[0].get("solution_title", "StyleStudio Lookbook") if dynamic_matrix else "StyleStudio Lookbook"
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #d4a373;">
             <div class="kpi-label">#1 RECOMMENDED SOLUTION</div>
-            <div class="kpi-val" style="color: #0d9488; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
-            <div class="kpi-sub" style="color: #10b981;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
+            <div class="kpi-val" style="color: #c85a32; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
+            <div class="kpi-sub" style="color: #2a9d8f;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -605,17 +622,57 @@ with tab_overview:
             fig_fric.update_layout(height=280, margin=dict(l=10, r=10, t=40, b=10))
             st.plotly_chart(fig_fric, use_container_width=True)
 
-    # Dynamic Workarounds Row
+    # Dynamic Workarounds Row - Custom Luxury Cards
     st.markdown("### 🔄 Observed Offline Deliberation Workarounds")
     w1, w2, w3, w4 = st.columns(4)
     with w1:
-        st.info(f"**WhatsApp Sharing ({wa_wa_pct}%)**\n\nUsers screenshotting PDPs and sharing in group chats for second opinions on style and fit.")
+        st.markdown(f"""
+        <div class="workaround-card" style="border-left: 3.5px solid #25d366;">
+            <div class="workaround-header">
+                <span class="workaround-title">💬 WhatsApp Polls</span>
+                <span class="workaround-badge">{wa_wa_pct}%</span>
+            </div>
+            <div class="workaround-desc">
+                Screenshotting PDPs to share in group chats for second opinions on outfit styling and fit.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     with w2:
-        st.warning(f"**YouTube Try-On Search ({wa_yt_pct}%)**\n\nLeaving Myntra to search YouTube haul videos to see how clothes look on realistic bodies.")
+        st.markdown(f"""
+        <div class="workaround-card" style="border-left: 3.5px solid #e07a5f;">
+            <div class="workaround-header">
+                <span class="workaround-title">▶️ YouTube Hauls</span>
+                <span class="workaround-badge">{wa_yt_pct}%</span>
+            </div>
+            <div class="workaround-desc">
+                Leaving Myntra to search try-on hauls to see how garments look on realistic Indian body types.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     with w3:
-        st.success(f"**Bracketing Behavior ({wa_br_pct}%)**\n\nOrdering 2 adjacent sizes (M & L) with intent to return one, driving logistics costs.")
+        st.markdown(f"""
+        <div class="workaround-card" style="border-left: 3.5px solid #3d8b7a;">
+            <div class="workaround-header">
+                <span class="workaround-title">📦 Size Bracketing</span>
+                <span class="workaround-badge">{wa_br_pct}%</span>
+            </div>
+            <div class="workaround-desc">
+                Ordering 2 adjacent sizes (M & L) with deliberate intent to return one, driving logistics costs.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     with w4:
-        st.error(f"**Pinterest Moodboarding ({wa_pn_pct}%)**\n\nExtracting product photos to Canva/Pinterest to test pairing with existing wardrobes.")
+        st.markdown(f"""
+        <div class="workaround-card" style="border-left: 3.5px solid #d4a373;">
+            <div class="workaround-header">
+                <span class="workaround-title">📌 Moodboarding</span>
+                <span class="workaround-badge">{wa_pn_pct}%</span>
+            </div>
+            <div class="workaround-desc">
+                Exporting apparel images to Canva/Pinterest to visualize pairings with existing wardrobes.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # -------------------------------------------------------------------------------------------------
 # TAB 2: OPPORTUNITY MATRIX
@@ -755,7 +812,7 @@ with tab_explorer:
             <div class="verbatim-meta">
                 <span>🏷️ Brand: <b>{brand}</b></span> &nbsp;•&nbsp;
                 <span>📍 Source: <b>{src}</b></span> &nbsp;•&nbsp; 
-                <span>🧬 Friction: <b style="color:#ff3f6c;">{fric}</b></span> &nbsp;•&nbsp; 
+                <span>🧬 Friction: <b style="color:#c85a32;">{fric}</b></span> &nbsp;•&nbsp; 
                 <span>🎯 Intent: <b>{intent}</b></span> &nbsp;•&nbsp; 
                 <span>👤 Cohort: <b>{cohort}</b></span>
             </div>
