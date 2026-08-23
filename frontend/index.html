@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myntra Growth Intelligence | VoC Discovery Engine</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header-nav">
+    <div class="header-left">
+      <button class="hamburger-btn" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <a href="#" class="brand-logo">Myntra</a>
+      <div class="header-divider"></div>
+      <h1 class="app-title">Growth Intelligence | VoC Discovery Engine</h1>
+    </div>
+
+    <div class="header-right">
+      <button class="status-pill" id="openApiKeyModalBtn" style="cursor: pointer; background: #ffffff;" title="Configure LLM API Key">
+        <span id="llmStatusDot" style="width: 8px; height: 8px; border-radius: 50%; background: #0fa464; display: inline-block;"></span>
+        <span id="llmStatusText">🔑 Connect LLM API Key</span>
+      </button>
+
+      <div class="status-pill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>15,000 Records Analyzed • Zero Monetary Mode</span>
+      </div>
+      <button class="wallet-btn" id="openSettingsBtn" title="System Settings" aria-label="Wallet / Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M7 15h0M2 9.5h20"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN BODY WRAPPER ==================== -->
+  <div class="main-wrapper">
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar">
+      <div class="sidebar-heading">GLOBAL CONTEXT</div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="userSegmentSelect">User Segment</label>
+        <select id="userSegmentSelect" class="filter-select">
+          <option value="ALL">All Segments</option>
+          <option value="STUDENT_GEN_Z">Student / Gen Z</option>
+          <option value="WORKING_PROFESSIONAL">Working Professional</option>
+          <option value="TIER_2_ASPIRATIONAL">Tier-2 Aspirational</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="categoryFocusSelect">Category Focus</label>
+        <select id="categoryFocusSelect" class="filter-select">
+          <option value="ALL">Ethnic Wear (Women)</option>
+          <option value="WESTERN">Western & Dresses</option>
+          <option value="WORKWEAR">Formal & Workwear</option>
+          <option value="STREETWEAR">Casual & Streetwear</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Data Source</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" id="srcReddit" checked>
+            <span>Reddit (r/IndianFashionAddicts)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="srcPlayStore" checked>
+            <span>Play Store Reviews</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="srcTickets" checked>
+            <span>Support Tickets & Hauls</span>
+          </label>
+        </div>
+      </div>
+
+      <button id="applyFiltersBtn" class="apply-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="10" y1="18" x2="14" y2="18"></line></svg>
+        <span>Apply Filters</span>
+      </button>
+
+      <div style="margin-top: auto; padding-top: 18px; border-top: 1px solid var(--border-light); font-size: 11.5px; color: var(--text-muted);">
+        <strong>Active LLM:</strong> <span id="sidebarLLM">Gemini 1.5 Flash</span><br>
+        <span style="color: #0fa464;">✔ Zero-Incentives Enforced</span>
+      </div>
+    </aside>
+
+    <!-- ==================== CONTENT AREA ==================== -->
+    <main class="content-area">
+
+      <!-- Top Navigation Tabs -->
+      <nav class="nav-tabs-bar">
+        <button class="tab-pill active" data-tab="tab-overview">Executive Overview</button>
+        <button class="tab-pill" data-tab="tab-matrix">Opportunity Matrix</button>
+        <button class="tab-pill" data-tab="tab-insights">Strategic Behavioral Insights</button>
+        <button class="tab-pill" data-tab="tab-explorer">VoC Verbatim Explorer</button>
+        <button class="tab-pill" data-tab="tab-ai-ask">🤖 Ask AI Growth Engine</button>
+        <button class="tab-pill" data-tab="tab-stylestudio">StyleStudio MVP Demo</button>
+        <button class="tab-pill" data-tab="tab-deliverables">NextLeap PM Deliverables (Parts 1-7)</button>
+      </nav>
+
+      <!-- ==================== TAB 1: EXECUTIVE OVERVIEW ==================== -->
+      <section id="tab-overview" class="tab-content active">
+
+        <!-- 4 KPI Cards Matching Snip -->
+        <div class="kpi-row">
+          
+          <!-- Card 1: Total Corpus -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">TOTAL CORPUS</span>
+              <span class="kpi-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+              </span>
+            </div>
+            <div class="kpi-value" id="kpiTotalCorpus">15,000</div>
+            <div class="kpi-subtext">
+              <span>ⓘ Unincentivized records</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Genuine Intent -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">GENUINE INTENT</span>
+              <span class="kpi-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </span>
+            </div>
+            <div class="kpi-value" id="kpiGenuineIntent">54.2%</div>
+            <div class="kpi-subtext green-text">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              <span>Filtered for high conviction</span>
+            </div>
+          </div>
+
+          <!-- Card 3: #1 Barrier -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">#1 BARRIER</span>
+              <span class="kpi-icon" style="color: #e0245e;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
+            </div>
+            <div class="kpi-value crimson-text">Styling Anxiety</div>
+            <div class="kpi-subtext bold-metric">38.4%</div>
+          </div>
+
+          <!-- Card 4: Top Opportunity -->
+          <div class="kpi-card emerald-tint">
+            <div class="kpi-top">
+              <span class="kpi-label">TOP OPPORTUNITY</span>
+              <span class="kpi-icon" style="color: #0d9488;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 18 3 22 9 12 22 2 9 6 3"></polygon></svg>
+              </span>
+            </div>
+            <div class="kpi-value">Wearability Score</div>
+            <div class="score-badge">
+              <span>774.1</span> <span style="background: #e6f4ea; color: #137333; padding: 2px 6px; border-radius: 4px; font-size: 11px;">Idx</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 4D Taxonomy Analysis Section Matching Snip -->
+        <h2 class="section-title">4D Taxonomy Analysis</h2>
+
+        <div class="taxonomy-grid">
+          
+          <!-- Left Big Card: Behavioral Intent Split -->
+          <div class="card">
+            <div class="card-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>BEHAVIORAL INTENT SPLIT</span>
+            </div>
+
+            <div class="progress-list">
+              <div class="progress-item">
+                <div class="progress-labels">
+                  <span>Exploratory Browsing</span>
+                  <span id="pctExploratory">45%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-slate" style="width: 45%;"></div>
+                </div>
+              </div>
+
+              <div class="progress-item">
+                <div class="progress-labels">
+                  <span>High-Intent Purchase (Carted)</span>
+                  <span id="pctHighIntent">30%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-emerald" style="width: 30%;"></div>
+                </div>
+              </div>
+
+              <div class="progress-item">
+                <div class="progress-labels">
+                  <span>Wishlist Stagnation</span>
+                  <span id="pctWishlistStag">25%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-crimson" style="width: 25%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column Cards: Root Friction + Observed Workarounds -->
+          <div class="taxonomy-side-col">
+            
+            <!-- Root Friction Card -->
+            <div class="card" style="padding: 18px 20px;">
+              <div class="card-header" style="margin-bottom: 14px;">
+                <span>ROOT FRICTION</span>
+              </div>
+              <div class="bullet-list">
+                <div class="bullet-item">
+                  <span class="dot dot-red"></span>
+                  <span>Styling Anxiety (38%)</span>
+                </div>
+                <div class="bullet-item">
+                  <span class="dot dot-purple"></span>
+                  <span>Fit Ambiguity (27%)</span>
+                </div>
+                <div class="bullet-item">
+                  <span class="dot dot-pink"></span>
+                  <span>Tactile Doubt (16%)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Observed Workarounds Card -->
+            <div class="workaround-card">
+              <div class="card-header" style="margin-bottom: 0;">
+                <span>OBSERVED WORKAROUNDS</span>
+              </div>
+              <div class="workaround-quote">
+                "Checking Instagram for styling ideas before buying on Myntra."
+              </div>
+              <a class="workaround-link" id="viewPatternsLink">
+                <span>View Patterns</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 2: OPPORTUNITY MATRIX ==================== -->
+      <section id="tab-matrix" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <span>PRIORITIZED NON-MONETARY OPPORTUNITY MATRIX</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            Calculated via: <code>Opportunity Score = Frequency Share (%) × Severity (1-5) × Non-Monetary Solvability (1-5)</code>
+          </p>
+          <div class="data-table-card">
+            <table class="styled-table" id="opportunityTable">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Friction Cluster</th>
+                  <th>Frequency %</th>
+                  <th>Severity (1-5)</th>
+                  <th>Solvability (1-5)</th>
+                  <th>Opportunity Score</th>
+                  <th>Top Cohort</th>
+                  <th>Primary Workaround</th>
+                </tr>
+              </thead>
+              <tbody id="opportunityTableBody">
+                <!-- Dynamically Populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: STRATEGIC BEHAVIORAL INSIGHTS ==================== -->
+      <section id="tab-insights" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <span>NEXTLEAP 10-QUESTION DISCOVERY AUDIT (EXECUTIVE SUMMARY)</span>
+          </div>
+          <div id="discoveryAuditContainer" style="display: flex; flex-direction: column; gap: 14px;">
+            <!-- Dynamically Populated -->
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 18px;">
+          <div class="card-header">
+            <span>30-DAY WISHLIST-TO-PURCHASE FUNNEL DECOMPOSITION</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            Formula: <code>C_30D = L1 (Re-engagement) × L2 (Decision Confidence) × L3 (Wishlist to Bag) × L4 (Bag to Checkout)</code>
+          </p>
+          <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 13.5px; line-height: 1.6;">
+            <strong>Baseline Funnel:</strong> 0.42 (L1) × 0.18 (L2) × 0.125 (L3) × 0.65 (L4) = <strong>0.61% Baseline Realized Conversion</strong><br>
+            <strong>Post-MVP Funnel:</strong> 0.58 (L1) × 0.45 (L2) × 0.22 (L3) × 0.72 (L4) = <strong>4.13% Target Realized Conversion</strong><br>
+            <span style="color: #0fa464; font-weight: bold;">Relative Conversion Lift Projected: +340%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: VOC VERBATIM EXPLORER ==================== -->
+      <section id="tab-explorer" class="tab-content">
+        <div class="search-filter-bar">
+          <input type="text" id="verbatimSearchInput" class="search-input" placeholder="Search verbatim feedback (e.g. 'kurti', 'sizing', 'pair', 'transparent')...">
+          <select id="frictionFilterSelect" class="filter-select" style="max-width: 260px;">
+            <option value="ALL">All Friction Types</option>
+            <option value="STYLING_AND_PAIRABILITY_ANXIETY">Styling & Pairability Anxiety</option>
+            <option value="FIT_AND_SILHOUETTE_AMBIGUITY">Fit & Silhouette Ambiguity</option>
+            <option value="FABRIC_AND_TACTILE_DOUBT">Fabric & Tactile Doubt</option>
+            <option value="SOCIAL_VALIDATION_LAG">Social Validation Lag</option>
+            <option value="COMPARISON_PARALYSIS">Comparison Paralysis</option>
+          </select>
+        </div>
+
+        <div id="verbatimGrid" class="verbatim-grid">
+          <!-- Dynamically Populated Cards -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB: ASK AI GROWTH ENGINE ==================== -->
+      <section id="tab-ai-ask" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <span>🤖 LIVE AI GROWTH ADVISOR (POWERED BY CONNECTED LLM API)</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            Ask complex strategic, qualitative, or sizing questions grounded directly in the 15,000 VoC corpus without monetary incentives.
+          </p>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <input type="text" id="aiPromptInput" class="search-input" placeholder="e.g. 'What are the top styling anxieties for college Gen-Z when buying blazers?'" value="Why do Gen-Z users hesitate to purchase ethnic wear after saving it in their wishlist?">
+            <button class="btn-primary" id="sendAiQueryBtn" style="width: auto; padding: 10px 20px;">Ask LLM ✦</button>
+          </div>
+
+          <div id="aiResponseBox" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; font-size: 13.5px; line-height: 1.6; color: #1e293b; min-height: 120px;">
+            <em>AI response will appear here after querying the connected LLM...</em>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5: STYLESTUDIO MVP DEMO ==================== -->
+      <section id="tab-stylestudio" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <span>MYNTRA WISHLIST "STYLESTUDIO" — 1-TAP OUTFIT PAIRING SIMULATOR</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+            Resolves <strong>Styling & Pairability Anxiety (#1 Opportunity)</strong> directly on the wishlist item card without monetary discounts.
+          </p>
+
+          <div class="studio-grid">
+            <!-- Left: Outfit Canvas -->
+            <div class="canvas-box">
+              <div style="font-size: 13px; font-weight: 700; color: #1e293b;">INTERACTIVE 2D OUTFIT CANVAS</div>
+              
+              <div class="outfit-layer" id="layerTop">
+                <div>
+                  <div style="font-size: 11px; color: #64748b; font-weight: 700;">WISHED TOP</div>
+                  <div style="font-weight: 700; color: #d8005a;" id="studioTopName">Anouk Emerald Green Kurti</div>
+                </div>
+                <span class="tag-pill">In Wishlist</span>
+              </div>
+
+              <div class="outfit-layer" id="layerBottom">
+                <div>
+                  <div style="font-size: 11px; color: #64748b; font-weight: 700;">AI RECOMMENDED BOTTOM</div>
+                  <div style="font-weight: 700;" id="studioBottomName">Off-White Cotton Culottes (Anouk)</div>
+                </div>
+                <button class="tab-pill" id="swapBottomBtn" style="padding: 4px 10px; font-size: 11px;">Swap ⟳</button>
+              </div>
+
+              <div class="outfit-layer" id="layerFootwear">
+                <div>
+                  <div style="font-size: 11px; color: #64748b; font-weight: 700;">COMPLEMENTARY FOOTWEAR</div>
+                  <div style="font-weight: 700;" id="studioFootwearName">Beige Braided Block Heels (Mast & Harbour)</div>
+                </div>
+                <button class="tab-pill" id="swapFootwearBtn" style="padding: 4px 10px; font-size: 11px;">Swap ⟳</button>
+              </div>
+
+              <button class="btn-primary" id="addOutfitToBagBtn">Add Complete Look to Bag</button>
+            </div>
+
+            <!-- Right: Body-Matched UGC Carousel -->
+            <div class="card" style="border: 1px solid #e2e8f0; padding: 18px;">
+              <div class="card-header" style="margin-bottom: 12px;">
+                <span>BODY-MATCHED CUSTOMER UGC PHOTOS</span>
+              </div>
+              <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+                <span class="tag-pill" style="background: #eafaf1; color: #0fa464;">Height: 5'3" (Petite)</span>
+                <span class="tag-pill" style="background: #f1f5f9; color: #334155;">Curvy Hourglass</span>
+                <span class="tag-pill" style="background: #fdf2f8; color: #db2777;">Verified Buyer</span>
+              </div>
+
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 14px;">
+                <p style="font-size: 13px; font-style: italic; color: #334155; margin-bottom: 8px;">
+                  "I was scared the green would look dull, but paired with white culottes it looked stunning for my college fest! Length is perfect on 5'3."
+                </p>
+                <div style="font-size: 11.5px; color: #64748b;">— Sneha R. (Delhi) | Bought Size M</div>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <div style="flex: 1; background: #e2e8f0; height: 110px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #64748b;">
+                  📸 User Photo #1 (Daylight)
+                </div>
+                <div style="flex: 1; background: #e2e8f0; height: 110px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #64748b;">
+                  📸 User Photo #2 (Walking Drape)
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 6: NEXTLEAP PM DELIVERABLES ==================== -->
+      <section id="tab-deliverables" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <span>CONSOLIDATED CAPSTONE REPORT (PARTS 1 TO 7)</span>
+          </div>
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <a href="../Part_1_to_7_NextLeap_Deliverables.md" target="_blank" class="tab-pill" style="text-decoration: none;">📄 Open Raw Markdown</a>
+          </div>
+          <div id="markdownRenderArea" style="line-height: 1.6; font-size: 13.5px; color: #1e293b;">
+            <!-- Rendered Markdown Sections -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ==================== API KEY CONFIGURATION MODAL ==================== -->
+  <div id="apiKeyModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
+    <div style="background: #ffffff; border-radius: 12px; max-width: 480px; width: 90%; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #14151a;">Connect LLM API Key</h3>
+        <button id="closeModalBtn" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #64748b;">&times;</button>
+      </div>
+
+      <p style="font-size: 12.5px; color: #64748b; margin-bottom: 16px;">
+        Connect your <strong>Google Gemini API Key</strong> or <strong>OpenAI API Key</strong> to enable AI zero-shot classification and live conversational reasoning over the 15k VoC dataset.
+      </p>
+
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 12px; font-weight: 600; color: #334155; display: block; margin-bottom: 6px;">LLM Provider</label>
+        <select id="modalProviderSelect" class="filter-select">
+          <option value="gemini">Google Gemini (Recommended)</option>
+          <option value="openai">OpenAI</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 12px; font-weight: 600; color: #334155; display: block; margin-bottom: 6px;">API Key</label>
+        <input type="password" id="modalApiKeyInput" class="search-input" placeholder="AIzaSy... or sk-..." style="width: 100%;">
+        <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">Get free key: <a href="https://aistudio.google.com/" target="_blank" style="color: #d8005a;">Google AI Studio</a></div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="font-size: 12px; font-weight: 600; color: #334155; display: block; margin-bottom: 6px;">Model Name</label>
+        <select id="modalModelSelect" class="filter-select">
+          <option value="gemini-1.5-flash">gemini-1.5-flash (Fast & Recommended)</option>
+          <option value="gemini-1.5-pro">gemini-1.5-pro (High Reasoning)</option>
+          <option value="gpt-4o-mini">gpt-4o-mini (OpenAI)</option>
+        </select>
+      </div>
+
+      <div id="modalStatusMsg" style="display: none; padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 14px;"></div>
+
+      <div style="display: flex; gap: 10px;">
+        <button id="testApiKeyBtn" class="tab-pill" style="flex: 1; padding: 10px;">Test Ping ⚡</button>
+        <button id="saveApiKeyBtn" class="btn-primary" style="flex: 1.5; padding: 10px;">Save & Activate</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
