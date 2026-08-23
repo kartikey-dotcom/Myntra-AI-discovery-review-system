@@ -469,9 +469,6 @@ st.markdown("""
             Diagnosing & Solving 30-Day Wishlist Stagnation via Psychological, Visual & Social Nudges
         </div>
     </div>
-    <div style="text-align: right;">
-        <span class="badge-pill">Strictly Zero Monetary Incentives</span>
-    </div>
 </div>
 """, unsafe_allow_html=True)
 
