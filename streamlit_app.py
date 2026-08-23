@@ -494,11 +494,11 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==================== NAVIGATION TABS ====================
-tab_overview, tab_matrix, tab_insights, tab_explorer, tab_ai = st.tabs([
+tab_overview, tab_explorer, tab_matrix, tab_insights, tab_ai = st.tabs([
     "📊 Executive Overview",
+    "🔍 VoC Verbatim Explorer",
     "🎯 Opportunity Matrix",
     "🧠 Strategic Insights",
-    "🔍 VoC Verbatim Explorer",
     "🤖 Ask AI Growth Engine"
 ])
 
@@ -615,7 +615,59 @@ with tab_overview:
         st.error(f"**Pinterest Moodboarding ({wa_pn_pct}%)**\n\nExtracting product photos to Canva/Pinterest to test pairing with existing wardrobes.")
 
 # -------------------------------------------------------------------------------------------------
-# TAB 2: OPPORTUNITY MATRIX
+# TAB 2: VOC VERBATIM EXPLORER
+# -------------------------------------------------------------------------------------------------
+with tab_explorer:
+    st.markdown("### 🔍 Multi-Source VoC Verbatim Explorer")
+    st.caption("Search across raw & normalized customer deliberations matching your active filters.")
+
+    col_s1, col_s2 = st.columns([3, 1])
+    with col_s1:
+        search_query = st.text_input("🔍 Search Verbatims by Keyword", placeholder="e.g., transparent, roadster, kurti, sleeves, styling...")
+    with col_s2:
+        filter_friction_local = st.selectbox(
+            "Filter by Friction",
+            ["ALL"] + sorted(list(set([r.get("friction", "") for r in filtered_records if r.get("friction")])))
+        )
+
+    # Local filtering on top of global filtered_records
+    explorer_results = []
+    for r in filtered_records:
+        text = r.get("raw_text", "") or r.get("normalized_text", "")
+        fric = r.get("friction", "")
+
+        if search_query and search_query.lower() not in text.lower():
+            continue
+        if filter_friction_local != "ALL" and fric != filter_friction_local:
+            continue
+        explorer_results.append(r)
+
+    st.markdown(f"**Displaying {min(len(explorer_results), 30)} of {len(explorer_results):,} matching records**")
+
+    # Display in clean verbatim cards
+    for item in explorer_results[:30]:
+        text = item.get("raw_text", "") or item.get("normalized_text", "")
+        src = item.get("source", "Play Store").replace("_", " ").title()
+        fric = item.get("friction", "Unknown").replace("_", " ").title()
+        intent = item.get("intent", "Genuine Intent").replace("_", " ").title()
+        cohort = (item.get("cohort") or item.get("user_metadata", {}).get("cohort", "General")).replace("_", " ").title()
+        brand = item.get("brand_mentioned", "Myntra Brand")
+
+        st.markdown(f"""
+        <div class="verbatim-card">
+            <div class="verbatim-text">"{text}"</div>
+            <div class="verbatim-meta">
+                <span>🏷️ Brand: <b>{brand}</b></span> &nbsp;•&nbsp;
+                <span>📍 Source: <b>{src}</b></span> &nbsp;•&nbsp; 
+                <span>🧬 Friction: <b style="color:#c85a32;">{fric}</b></span> &nbsp;•&nbsp; 
+                <span>🎯 Intent: <b>{intent}</b></span> &nbsp;•&nbsp; 
+                <span>👤 Cohort: <b>{cohort}</b></span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+# -------------------------------------------------------------------------------------------------
+# TAB 3: OPPORTUNITY MATRIX
 # -------------------------------------------------------------------------------------------------
 with tab_matrix:
     st.markdown("### 🎯 Ranked Opportunity Matrix")
@@ -701,7 +753,7 @@ with tab_matrix:
                     st.caption("No direct verbatims found for this friction in the current filter scope.")
 
 # -------------------------------------------------------------------------------------------------
-# TAB 3: STRATEGIC BEHAVIORAL INSIGHTS
+# TAB 4: STRATEGIC BEHAVIORAL INSIGHTS
 # -------------------------------------------------------------------------------------------------
 with tab_insights:
     st.markdown("### 🧠 Strategic Behavioral Insights")
@@ -761,58 +813,6 @@ with tab_insights:
     )
     fig_hm.update_layout(height=230, margin=dict(l=10, r=10, t=40, b=10))
     st.plotly_chart(fig_hm, use_container_width=True)
-
-# -------------------------------------------------------------------------------------------------
-# TAB 4: VOC VERBATIM EXPLORER
-# -------------------------------------------------------------------------------------------------
-with tab_explorer:
-    st.markdown("### 🔍 Multi-Source VoC Verbatim Explorer")
-    st.caption("Search across raw & normalized customer deliberations matching your active filters.")
-
-    col_s1, col_s2 = st.columns([3, 1])
-    with col_s1:
-        search_query = st.text_input("🔍 Search Verbatims by Keyword", placeholder="e.g., transparent, roadster, kurti, sleeves, styling...")
-    with col_s2:
-        filter_friction_local = st.selectbox(
-            "Filter by Friction",
-            ["ALL"] + sorted(list(set([r.get("friction", "") for r in filtered_records if r.get("friction")])))
-        )
-
-    # Local filtering on top of global filtered_records
-    explorer_results = []
-    for r in filtered_records:
-        text = r.get("raw_text", "") or r.get("normalized_text", "")
-        fric = r.get("friction", "")
-
-        if search_query and search_query.lower() not in text.lower():
-            continue
-        if filter_friction_local != "ALL" and fric != filter_friction_local:
-            continue
-        explorer_results.append(r)
-
-    st.markdown(f"**Displaying {min(len(explorer_results), 30)} of {len(explorer_results):,} matching records**")
-
-    # Display in clean verbatim cards
-    for item in explorer_results[:30]:
-        text = item.get("raw_text", "") or item.get("normalized_text", "")
-        src = item.get("source", "Play Store").replace("_", " ").title()
-        fric = item.get("friction", "Unknown").replace("_", " ").title()
-        intent = item.get("intent", "Genuine Intent").replace("_", " ").title()
-        cohort = (item.get("cohort") or item.get("user_metadata", {}).get("cohort", "General")).replace("_", " ").title()
-        brand = item.get("brand_mentioned", "Myntra Brand")
-
-        st.markdown(f"""
-        <div class="verbatim-card">
-            <div class="verbatim-text">"{text}"</div>
-            <div class="verbatim-meta">
-                <span>🏷️ Brand: <b>{brand}</b></span> &nbsp;•&nbsp;
-                <span>📍 Source: <b>{src}</b></span> &nbsp;•&nbsp; 
-                <span>🧬 Friction: <b style="color:#ff3f6c;">{fric}</b></span> &nbsp;•&nbsp; 
-                <span>🎯 Intent: <b>{intent}</b></span> &nbsp;•&nbsp; 
-                <span>👤 Cohort: <b>{cohort}</b></span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
 # -------------------------------------------------------------------------------------------------
 # TAB 5: ASK AI GROWTH ENGINE
