@@ -784,10 +784,10 @@ with tab_ai:
         )
     with p1_col3:
         st.button(
-            "✨ StyleStudio pairability logic",
+            "⏱️ 48-Hour intent drop-off",
             use_container_width=True,
             on_click=set_query,
-            args=("Explain how the StyleStudio Outfit Visualizer solves pairability anxiety without using any discounts or price drops.",)
+            args=("Why does wishlist purchase intent decay significantly after 48 hours, and what non-monetary triggers can re-engage shoppers?",)
         )
 
     # Row 2 of Presets
