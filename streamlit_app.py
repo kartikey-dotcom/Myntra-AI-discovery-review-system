@@ -769,8 +769,8 @@ with tab_ai:
             st.session_state["auto_run_ai"] = True
             st.rerun()
     with p1_col2:
-        if st.button("👗 Roadster vs Mango sizing variance", use_container_width=True):
-            st.session_state["ai_query_input"] = "What are the exact customer complaints regarding sizing discrepancies between Roadster and Mango in our reviews?"
+        if st.button("👥 Body-matched UGC for sizing", use_container_width=True):
+            st.session_state["ai_query_input"] = "How does filtering verified customer review photos by height and body type eliminate sizing doubt and reduce returns?"
             st.session_state["auto_run_ai"] = True
             st.rerun()
     with p1_col3:
