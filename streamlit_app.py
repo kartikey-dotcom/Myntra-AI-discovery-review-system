@@ -270,9 +270,6 @@ with st.sidebar:
     include_playstore = st.checkbox("Play Store Reviews", value=True)
     include_youtube = st.checkbox("YouTube Try-On Hauls", value=True)
 
-    st.divider()
-    st.caption("NextLeap PM Capstone Engine • Strictly Zero Discounts")
-
 # Background LLM Client (uses Secrets / .env automatically)
 active_client = LLMClient()
 
@@ -803,7 +800,7 @@ with tab_mvp:
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center; color: #94a3b8; font-size: 12px;'>"
-    "Myntra AI-Powered VoC Discovery & Growth Intelligence Engine • Built for NextLeap Product Management Capstone • Strictly Zero Monetary Incentives"
+    "Myntra AI-Powered VoC Discovery & Growth Intelligence Engine"
     "</div>",
     unsafe_allow_html=True
 )
