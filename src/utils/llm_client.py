@@ -30,10 +30,13 @@ class LLMClient:
         st_secrets = {}
         try:
             import streamlit as st
-            if hasattr(st, "secrets"):
-                st_secrets = st.secrets
+            try:
+                if hasattr(st, "secrets") and st.secrets:
+                    st_secrets = dict(st.secrets)
+            except Exception:
+                st_secrets = {}
         except Exception:
-            pass
+            st_secrets = {}
 
         self.provider = (
             provider

@@ -3,19 +3,19 @@
     "cluster_key": "STYLING_AND_PAIRABILITY_ANXIETY",
     "cluster_name": "Styling & Pairability Anxiety",
     "description": "Uncertainty regarding what wardrobe bottoms, footwear, or accessories match the item.",
-    "record_count": 3209,
-    "frequency_share_pct": 38.23,
+    "record_count": 4357,
+    "frequency_share_pct": 38.75,
     "severity_score": 4.6,
     "solvability_score": 4.9,
-    "opportunity_score": 861.7,
+    "opportunity_score": 873.43,
     "primary_workarounds": [
       "PINTEREST_CANVA_MOODBOARDING",
       "WHATSAPP_SHARING"
     ],
     "cohort_breakdown": {
-      "WORKING_PROFESSIONAL": "1087 (33.9%)",
-      "STUDENT_GEN_Z": "1481 (46.2%)",
-      "TIER_2_ASPIRATIONAL": "641 (20.0%)"
+      "WORKING_PROFESSIONAL": "1515 (34.8%)",
+      "STUDENT_GEN_Z": "1954 (44.8%)",
+      "TIER_2_ASPIRATIONAL": "888 (20.4%)"
     },
     "verbatim_samples": [
       {
@@ -43,19 +43,19 @@
     "cluster_key": "FIT_AND_SILHOUETTE_AMBIGUITY",
     "cluster_name": "Fit & Silhouette Ambiguity",
     "description": "Cross-brand sizing inconsistency, drape uncertainty on non-model Indian body types.",
-    "record_count": 2082,
-    "frequency_share_pct": 24.8,
+    "record_count": 2748,
+    "frequency_share_pct": 24.44,
     "severity_score": 4.5,
     "solvability_score": 4.2,
-    "opportunity_score": 468.72,
+    "opportunity_score": 461.92,
     "primary_workarounds": [
       "BRACKETING",
       "YOUTUBE_TRYON_SEARCH"
     ],
     "cohort_breakdown": {
-      "WORKING_PROFESSIONAL": "742 (35.6%)",
-      "TIER_2_ASPIRATIONAL": "413 (19.8%)",
-      "STUDENT_GEN_Z": "927 (44.5%)"
+      "WORKING_PROFESSIONAL": "970 (35.3%)",
+      "TIER_2_ASPIRATIONAL": "554 (20.2%)",
+      "STUDENT_GEN_Z": "1224 (44.5%)"
     },
     "verbatim_samples": [
       {
@@ -71,7 +71,7 @@
         "rqs": 1.0
       },
       {
-        "source": "r/delhi",
+        "source": "r/TwoXIndia",
         "text": "Sizing issue: size chart says chest 36 is M, but reviews say it runs super tight around the bust. Wishlisted till I know exact fit.",
         "cohort": "STUDENT_GEN_Z",
         "rqs": 1.0
@@ -83,20 +83,26 @@
     "cluster_key": "FABRIC_AND_TACTILE_DOUBT",
     "cluster_name": "Fabric & Tactile Doubt",
     "description": "Opacity, breathability, roughness, or wash shrinkage uncertainty.",
-    "record_count": 1774,
-    "frequency_share_pct": 21.13,
+    "record_count": 2347,
+    "frequency_share_pct": 20.88,
     "severity_score": 4.0,
     "solvability_score": 3.8,
-    "opportunity_score": 321.18,
+    "opportunity_score": 317.38,
     "primary_workarounds": [
       "YOUTUBE_TRYON_SEARCH"
     ],
     "cohort_breakdown": {
-      "WORKING_PROFESSIONAL": "635 (35.8%)",
-      "STUDENT_GEN_Z": "770 (43.4%)",
-      "TIER_2_ASPIRATIONAL": "369 (20.8%)"
+      "WORKING_PROFESSIONAL": "859 (36.6%)",
+      "STUDENT_GEN_Z": "981 (41.8%)",
+      "TIER_2_ASPIRATIONAL": "507 (21.6%)"
     },
     "verbatim_samples": [
+      {
+        "source": "r/TwoXIndia",
+        "text": "The Kurti & Ethnic Set looks gorgeous in photos, but is the fabric see-through? Kapda patla toh nahi hai daylight me? Waiting to be sure.",
+        "cohort": "TIER_2_ASPIRATIONAL",
+        "rqs": 0.96
+      },
       {
         "source": "Google Play Store (com.myntra.android)",
         "text": "Is this 100% pure cotton or polyester blend? In Delhi summer, synthetic fabric is unwearable. Wishlisted until fabric details get clear.",
@@ -105,15 +111,9 @@
       },
       {
         "source": "Google Play Store (com.myntra.android)",
-        "text": "The Wide Leg Jeans looks gorgeous in photos, but is the fabric see-through? Kapda patla toh nahi hai daylight me? Waiting to be sure.",
-        "cohort": "STUDENT_GEN_Z",
-        "rqs": 0.91
-      },
-      {
-        "source": "Google Play Store (com.myntra.android)",
-        "text": "Looks like linen in pictures, but description says viscose blend. Is it breathable or will it feel scratchy? Hesitating.",
-        "cohort": "STUDENT_GEN_Z",
-        "rqs": 0.91
+        "text": "The lining inside this Cropped Top - is it soft or rough polyester? Don't want itchy seams during 8 hour workdays. Saved for now.",
+        "cohort": "TIER_2_ASPIRATIONAL",
+        "rqs": 0.95
       }
     ],
     "rank": 3
@@ -122,18 +122,18 @@
     "cluster_key": "SOCIAL_VALIDATION_LAG",
     "cluster_name": "Social Validation Lag",
     "description": "Lag while waiting for friends/family approval via WhatsApp screenshots.",
-    "record_count": 791,
-    "frequency_share_pct": 9.42,
+    "record_count": 1057,
+    "frequency_share_pct": 9.4,
     "severity_score": 3.8,
     "solvability_score": 4.5,
-    "opportunity_score": 161.08,
+    "opportunity_score": 160.74,
     "primary_workarounds": [
       "WHATSAPP_SHARING"
     ],
     "cohort_breakdown": {
-      "TIER_2_ASPIRATIONAL": "138 (17.4%)",
-      "WORKING_PROFESSIONAL": "277 (35.0%)",
-      "STUDENT_GEN_Z": "376 (47.5%)"
+      "TIER_2_ASPIRATIONAL": "206 (19.5%)",
+      "WORKING_PROFESSIONAL": "371 (35.1%)",
+      "STUDENT_GEN_Z": "480 (45.4%)"
     },
     "verbatim_samples": [
       {
@@ -143,16 +143,16 @@
         "rqs": 0.91
       },
       {
+        "source": "YouTube (Myntra Formal Trousers Try-On Haul)",
+        "text": "Added to wishlist last night. Need second opinion from my sister on whether this color looks washed out on warm Indian undertones.",
+        "cohort": "TIER_2_ASPIRATIONAL",
+        "rqs": 0.91
+      },
+      {
         "source": "Google Play Store (com.myntra.android)",
         "text": "Sent the Myntra link to 3 friends to ask 'should I buy or skip?'. Nobody replied yet so it's still in my wishlist.",
         "cohort": "STUDENT_GEN_Z",
         "rqs": 0.79
-      },
-      {
-        "source": "Google Play Store (com.myntra.android)",
-        "text": "Is this Casual Blazer too experimental for college? Wishlisted it, waiting for my roommate to see if she approves.",
-        "cohort": "STUDENT_GEN_Z",
-        "rqs": 0.67
       }
     ],
     "rank": 4
@@ -161,18 +161,18 @@
     "cluster_key": "COMPARISON_PARALYSIS",
     "cluster_name": "Comparison Paralysis",
     "description": "Cognitive overload from holding 4-6 near-identical shortlisted tops/dresses.",
-    "record_count": 326,
-    "frequency_share_pct": 3.88,
+    "record_count": 465,
+    "frequency_share_pct": 4.14,
     "severity_score": 3.5,
     "solvability_score": 4.4,
-    "opportunity_score": 59.75,
+    "opportunity_score": 63.76,
     "primary_workarounds": [
       "NONE"
     ],
     "cohort_breakdown": {
-      "TIER_2_ASPIRATIONAL": "75 (23.0%)",
-      "STUDENT_GEN_Z": "151 (46.3%)",
-      "WORKING_PROFESSIONAL": "100 (30.7%)"
+      "TIER_2_ASPIRATIONAL": "99 (21.3%)",
+      "STUDENT_GEN_Z": "201 (43.2%)",
+      "WORKING_PROFESSIONAL": "165 (35.5%)"
     },
     "verbatim_samples": [
       {
@@ -183,13 +183,13 @@
       },
       {
         "source": "Google Play Store (com.myntra.android)",
-        "text": "I have 6 almost identical black Kurti & Ethnic Sets wishlisted across Vishudh, H&M, and Mango. Can't decide which one has the best drape.",
+        "text": "Wishlist has 20 items. Every time I open it to buy one Casual Blazer, I get confused between 3 similar options and close the app.",
         "cohort": "WORKING_PROFESSIONAL",
-        "rqs": 0.79
+        "rqs": 0.84
       },
       {
         "source": "Google Play Store (com.myntra.android)",
-        "text": "I have 6 almost identical black Wide Leg Jeanss wishlisted across Marks & Spencer, H&M, and Mango. Can't decide which one has the best drape.",
+        "text": "Wishlist has 20 items. Every time I open it to buy one Wide Leg Jeans, I get confused between 3 similar options and close the app.",
         "cohort": "STUDENT_GEN_Z",
         "rqs": 0.84
       }
@@ -200,35 +200,35 @@
     "cluster_key": "OCCASION_DISCONNECT",
     "cluster_name": "Occasion Disconnect",
     "description": "Aspirational liking without an upcoming event or practical use case.",
-    "record_count": 212,
-    "frequency_share_pct": 2.53,
+    "record_count": 269,
+    "frequency_share_pct": 2.39,
     "severity_score": 3.2,
     "solvability_score": 3.5,
-    "opportunity_score": 28.34,
+    "opportunity_score": 26.77,
     "primary_workarounds": [
       "NONE"
     ],
     "cohort_breakdown": {
-      "WORKING_PROFESSIONAL": "73 (34.4%)",
-      "STUDENT_GEN_Z": "105 (49.5%)",
-      "TIER_2_ASPIRATIONAL": "34 (16.0%)"
+      "WORKING_PROFESSIONAL": "83 (30.9%)",
+      "STUDENT_GEN_Z": "138 (51.3%)",
+      "TIER_2_ASPIRATIONAL": "48 (17.8%)"
     },
     "verbatim_samples": [
       {
-        "source": "r/TwoXIndia",
-        "text": "Such a gorgeous party Casual Blazer from Sangria. Wishlisted for future Goa trip / friend's wedding, but no immediate plan.",
-        "cohort": "WORKING_PROFESSIONAL",
-        "rqs": 0.95
-      },
-      {
-        "source": "r/TwoXIndia",
+        "source": "r/bangalore",
         "text": "Love the design, but it feels too festive for regular office and too formal for weekends. Lingering in my wishlist.",
         "cohort": "TIER_2_ASPIRATIONAL",
         "rqs": 0.95
       },
       {
-        "source": "r/IndianFashionAddicts",
-        "text": "Love the design, but it feels too festive for regular office and too formal for weekends. Lingering in my wishlist.",
+        "source": "YouTube (Myntra Maxi Skirt Try-On Haul)",
+        "text": "Such a gorgeous party Maxi Skirt from Aurelia. Wishlisted for future Goa trip / friend's wedding, but no immediate plan.",
+        "cohort": "STUDENT_GEN_Z",
+        "rqs": 0.95
+      },
+      {
+        "source": "YouTube (Myntra Wide Leg Jeans Try-On Haul)",
+        "text": "Such a gorgeous party Wide Leg Jeans from Roadster. Wishlisted for future Goa trip / friend's wedding, but no immediate plan.",
         "cohort": "WORKING_PROFESSIONAL",
         "rqs": 0.95
       }
@@ -239,18 +239,18 @@
     "cluster_key": "PRICE_WAITING",
     "cluster_name": "Price Speculation (Excluded from Non-Monetary Ranking)",
     "description": "Waiting for sale markdowns or coupon drops.",
-    "record_count": 82,
-    "frequency_share_pct": 0.98,
+    "record_count": 98,
+    "frequency_share_pct": 0.87,
     "severity_score": 2.5,
     "solvability_score": 1.0,
-    "opportunity_score": 2.45,
+    "opportunity_score": 2.17,
     "primary_workarounds": [
       "NONE"
     ],
     "cohort_breakdown": {
-      "TIER_2_ASPIRATIONAL": "21 (25.6%)",
-      "WORKING_PROFESSIONAL": "24 (29.3%)",
-      "STUDENT_GEN_Z": "37 (45.1%)"
+      "TIER_2_ASPIRATIONAL": "24 (24.5%)",
+      "WORKING_PROFESSIONAL": "28 (28.6%)",
+      "STUDENT_GEN_Z": "46 (46.9%)"
     },
     "verbatim_samples": [
       {
@@ -260,13 +260,13 @@
         "rqs": 0.67
       },
       {
-        "source": "r/bangalore",
-        "text": "Waiting for end of month coupon / bank discount before checking out this Party Jumpsuit.",
-        "cohort": "STUDENT_GEN_Z",
+        "source": "r/delhi",
+        "text": "Added to wishlist to track discount. Price is currently Rs. 1,899, will only buy if it drops below 1,200.",
+        "cohort": "WORKING_PROFESSIONAL",
         "rqs": 0.67
       },
       {
-        "source": "r/IndianFashionAddicts",
+        "source": "r/bangalore",
         "text": "Added to wishlist to track discount. Price is currently Rs. 1,899, will only buy if it drops below 1,200.",
         "cohort": "STUDENT_GEN_Z",
         "rqs": 0.67

@@ -104,18 +104,13 @@ NOISE_TEMPLATES = [
     "Good.", "Osm!!", "Mast product.", "Best app for shopping.", "Fast shipping thanks."
 ]
 
-def generate_voc_corpus(total_records=15000):
+def generate_voc_corpus(target_count: int = 15000):
     records = []
     
-    # Target allocations
-    # Play Store: 10,000
-    # Reddit: 3,500
-    # YouTube: 1,500
-    
     source_counts = {
-        "Google Play Store (com.myntra.android)": 10000,
-        "Reddit Fashion Communities": 3500,
-        "YouTube Fashion Haul Comments": 1500
+        "Google Play Store (com.myntra.android)": int(target_count * 0.65),
+        "Reddit Fashion Communities": int(target_count * 0.2333),
+        "YouTube Fashion Haul Comments": target_count - int(target_count * 0.65) - int(target_count * 0.2333)
     }
     
     record_id_counter = 1

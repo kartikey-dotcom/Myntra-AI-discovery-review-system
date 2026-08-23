@@ -1,174 +1,174 @@
 {
-  "total_records_classified": 8476,
+  "total_records_classified": 11341,
   "dimension_1_intent_distribution": {
     "GENUINE_PURCHASE_INTENT": {
-      "count": 7442,
-      "percentage": 87.8
+      "count": 9955,
+      "percentage": 87.78
     },
     "SHORTLIST_COMPARISON": {
-      "count": 641,
-      "percentage": 7.56
+      "count": 887,
+      "percentage": 7.82
     },
     "AESTHETIC_BOOKMARKING": {
-      "count": 285,
-      "percentage": 3.36
+      "count": 369,
+      "percentage": 3.25
     },
     "PRICE_SPECULATION": {
-      "count": 108,
-      "percentage": 1.27
+      "count": 130,
+      "percentage": 1.15
     }
   },
   "dimension_2_root_friction_distribution": {
     "STYLING_AND_PAIRABILITY_ANXIETY": {
-      "count": 3209,
-      "percentage": 37.86
+      "count": 4357,
+      "percentage": 38.42
     },
     "FIT_AND_SILHOUETTE_AMBIGUITY": {
-      "count": 2082,
-      "percentage": 24.56
+      "count": 2748,
+      "percentage": 24.23
     },
     "FABRIC_AND_TACTILE_DOUBT": {
-      "count": 1774,
-      "percentage": 20.93
+      "count": 2347,
+      "percentage": 20.69
     },
     "SOCIAL_VALIDATION_LAG": {
-      "count": 791,
-      "percentage": 9.33
+      "count": 1057,
+      "percentage": 9.32
     },
     "COMPARISON_PARALYSIS": {
-      "count": 326,
-      "percentage": 3.85
+      "count": 465,
+      "percentage": 4.1
     },
     "OCCASION_DISCONNECT": {
-      "count": 212,
-      "percentage": 2.5
+      "count": 269,
+      "percentage": 2.37
     },
     "PRICE_WAITING": {
-      "count": 82,
-      "percentage": 0.97
+      "count": 98,
+      "percentage": 0.86
     }
   },
   "dimension_3_offline_workarounds": {
     "NONE": {
-      "count": 6515,
-      "percentage": 76.86
+      "count": 8565,
+      "percentage": 75.52
     },
     "YOUTUBE_TRYON_SEARCH": {
-      "count": 899,
-      "percentage": 10.61
+      "count": 1351,
+      "percentage": 11.91
     },
     "WHATSAPP_SHARING": {
-      "count": 669,
-      "percentage": 7.89
+      "count": 862,
+      "percentage": 7.6
     },
     "PINTEREST_CANVA_MOODBOARDING": {
-      "count": 393,
-      "percentage": 4.64
+      "count": 563,
+      "percentage": 4.96
     }
   },
   "dimension_4_cohort_distribution": {
     "STUDENT_GEN_Z": {
-      "count": 3847,
-      "percentage": 45.39
+      "count": 5024,
+      "percentage": 44.3
     },
     "WORKING_PROFESSIONAL": {
-      "count": 2938,
-      "percentage": 34.66
+      "count": 3991,
+      "percentage": 35.19
     },
     "TIER_2_ASPIRATIONAL": {
-      "count": 1691,
-      "percentage": 19.95
+      "count": 2326,
+      "percentage": 20.51
     }
   },
   "cohort_friction_breakdown": {
     "STUDENT_GEN_Z": {
       "STYLING_AND_PAIRABILITY_ANXIETY": {
-        "count": 1481,
-        "pct_within_cohort": 38.5
+        "count": 1954,
+        "pct_within_cohort": 38.89
       },
       "FIT_AND_SILHOUETTE_AMBIGUITY": {
-        "count": 927,
-        "pct_within_cohort": 24.1
+        "count": 1224,
+        "pct_within_cohort": 24.36
       },
       "FABRIC_AND_TACTILE_DOUBT": {
-        "count": 770,
-        "pct_within_cohort": 20.02
+        "count": 981,
+        "pct_within_cohort": 19.53
       },
       "SOCIAL_VALIDATION_LAG": {
-        "count": 376,
-        "pct_within_cohort": 9.77
+        "count": 480,
+        "pct_within_cohort": 9.55
       },
       "COMPARISON_PARALYSIS": {
-        "count": 151,
-        "pct_within_cohort": 3.93
+        "count": 201,
+        "pct_within_cohort": 4.0
       },
       "OCCASION_DISCONNECT": {
-        "count": 105,
-        "pct_within_cohort": 2.73
+        "count": 138,
+        "pct_within_cohort": 2.75
       },
       "PRICE_WAITING": {
-        "count": 37,
-        "pct_within_cohort": 0.96
+        "count": 46,
+        "pct_within_cohort": 0.92
       }
     },
     "WORKING_PROFESSIONAL": {
       "STYLING_AND_PAIRABILITY_ANXIETY": {
-        "count": 1087,
-        "pct_within_cohort": 37.0
+        "count": 1515,
+        "pct_within_cohort": 37.96
       },
       "FIT_AND_SILHOUETTE_AMBIGUITY": {
-        "count": 742,
-        "pct_within_cohort": 25.26
+        "count": 970,
+        "pct_within_cohort": 24.3
       },
       "FABRIC_AND_TACTILE_DOUBT": {
-        "count": 635,
-        "pct_within_cohort": 21.61
+        "count": 859,
+        "pct_within_cohort": 21.52
       },
       "SOCIAL_VALIDATION_LAG": {
-        "count": 277,
-        "pct_within_cohort": 9.43
+        "count": 371,
+        "pct_within_cohort": 9.3
       },
       "COMPARISON_PARALYSIS": {
-        "count": 100,
-        "pct_within_cohort": 3.4
+        "count": 165,
+        "pct_within_cohort": 4.13
       },
       "OCCASION_DISCONNECT": {
-        "count": 73,
-        "pct_within_cohort": 2.48
+        "count": 83,
+        "pct_within_cohort": 2.08
       },
       "PRICE_WAITING": {
-        "count": 24,
-        "pct_within_cohort": 0.82
+        "count": 28,
+        "pct_within_cohort": 0.7
       }
     },
     "TIER_2_ASPIRATIONAL": {
       "STYLING_AND_PAIRABILITY_ANXIETY": {
-        "count": 641,
-        "pct_within_cohort": 37.91
+        "count": 888,
+        "pct_within_cohort": 38.18
       },
       "FIT_AND_SILHOUETTE_AMBIGUITY": {
-        "count": 413,
-        "pct_within_cohort": 24.42
+        "count": 554,
+        "pct_within_cohort": 23.82
       },
       "FABRIC_AND_TACTILE_DOUBT": {
-        "count": 369,
-        "pct_within_cohort": 21.82
+        "count": 507,
+        "pct_within_cohort": 21.8
       },
       "SOCIAL_VALIDATION_LAG": {
-        "count": 138,
-        "pct_within_cohort": 8.16
+        "count": 206,
+        "pct_within_cohort": 8.86
       },
       "COMPARISON_PARALYSIS": {
-        "count": 75,
-        "pct_within_cohort": 4.44
+        "count": 99,
+        "pct_within_cohort": 4.26
       },
       "OCCASION_DISCONNECT": {
-        "count": 34,
-        "pct_within_cohort": 2.01
+        "count": 48,
+        "pct_within_cohort": 2.06
       },
       "PRICE_WAITING": {
-        "count": 21,
-        "pct_within_cohort": 1.24
+        "count": 24,
+        "pct_within_cohort": 1.03
       }
     }
   }

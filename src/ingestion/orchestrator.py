@@ -25,7 +25,7 @@ logger = logging.getLogger("IngestionOrchestrator")
 TARGET_RAW_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "raw_15k_corpus.json")
 
 class IngestionOrchestrator:
-    def __init__(self, target_total: int = 15000):
+    def __init__(self, target_total: int = 20000):
         self.target_total = target_total
         self.app_scraper = AppStoreScraper()
         self.reddit_scraper = RedditFashionScraper()

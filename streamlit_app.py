@@ -481,7 +481,7 @@ st.markdown(f"""
     <div>
         🎯 <b>Active Scope:</b> <code>{segment_label}</code> &nbsp;•&nbsp; 
         👗 <b>Category:</b> <code>{selected_category}</code> &nbsp;•&nbsp; 
-        📡 <b>Records Active:</b> <b>{total_count:,}</b> High-Signal Records (from 15,000 Raw Corpus)
+        📡 <b>Records Active:</b> <b>{total_count:,}</b> High-Signal Records (from 20,000 Raw Corpus)
     </div>
     <div style="font-size: 11.5px; color: #64748b;">
         ⚡ Real-time Reactive Dashboard
@@ -507,8 +507,8 @@ with tab_overview:
     with col1:
         if selected_segment == "ALL" and selected_category == "ALL" and include_reddit and include_playstore and include_youtube:
             card1_label = "TOTAL ANALYZED CORPUS"
-            card1_val = "15,000"
-            card1_sub = "<span>📦</span> <b>8,476</b> High-Signal Deliberations"
+            card1_val = "20,000"
+            card1_sub = f"<span>📦</span> <b>{total_count:,}</b> High-Signal Deliberations"
         else:
             card1_label = "FILTERED COHORT"
             card1_val = f"{total_count:,}"
@@ -782,7 +782,7 @@ with tab_ai:
             "💡 Why Gen Z abandons tops?",
             use_container_width=True,
             on_click=set_query,
-            args=("Based on the 15k VoC corpus, why do Gen Z students hesitate to convert on wishlist tops, and what product feature resolves it?",)
+            args=("Based on the 20k VoC corpus, why do Gen Z students hesitate to convert on wishlist tops, and what product feature resolves it?",)
         )
     with p1_col2:
         st.button(
