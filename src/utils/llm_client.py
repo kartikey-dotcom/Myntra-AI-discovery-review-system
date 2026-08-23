@@ -26,17 +26,49 @@ class LLMClient:
         api_key: Optional[str] = None,
         model_name: Optional[str] = None
     ):
-        self.provider = (provider or os.getenv("LLM_PROVIDER", "gemini")).lower()
-        self.api_key = api_key or (
-            os.getenv("GEMINI_API_KEY") if self.provider == "gemini" else os.getenv("OPENAI_API_KEY")
-        )
-        
-        if self.provider == "gemini":
-            self.model_name = model_name or os.getenv("LLM_MODEL_NAME", "gemini-3.6-flash")
-        else:
-            self.model_name = model_name or os.getenv("LLM_MODEL_NAME", "gpt-4o-mini")
+        # Resolve Streamlit secrets if available
+        st_secrets = {}
+        try:
+            import streamlit as st
+            if hasattr(st, "secrets"):
+                st_secrets = st.secrets
+        except Exception:
+            pass
 
-        self.temperature = float(os.getenv("LLM_TEMPERATURE", "0.2"))
+        self.provider = (
+            provider
+            or st_secrets.get("LLM_PROVIDER")
+            or os.getenv("LLM_PROVIDER", "gemini")
+        ).lower()
+
+        if api_key:
+            self.api_key = api_key
+        elif self.provider == "gemini":
+            self.api_key = (
+                st_secrets.get("GEMINI_API_KEY")
+                or os.getenv("GEMINI_API_KEY")
+            )
+        else:
+            self.api_key = (
+                st_secrets.get("OPENAI_API_KEY")
+                or os.getenv("OPENAI_API_KEY")
+            )
+
+        if self.provider == "gemini":
+            self.model_name = (
+                model_name
+                or st_secrets.get("LLM_MODEL_NAME")
+                or os.getenv("LLM_MODEL_NAME", "gemini-1.5-flash")
+            )
+        else:
+            self.model_name = (
+                model_name
+                or st_secrets.get("LLM_MODEL_NAME")
+                or os.getenv("LLM_MODEL_NAME", "gpt-4o-mini")
+            )
+
+        temp_val = st_secrets.get("LLM_TEMPERATURE") or os.getenv("LLM_TEMPERATURE", "0.2")
+        self.temperature = float(temp_val)
 
     def is_configured(self) -> bool:
         """Returns True if a valid API key is present."""
