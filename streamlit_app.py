@@ -32,25 +32,25 @@ st.set_page_config(
 st.markdown("""
 <style>
     /* Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
     
     html, body, [class*="css"] {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #201a18;
     }
 
-    /* Top Brand Banner - Midnight Dark */
+    /* Top Brand Banner - Warm Editorial Espresso */
     .brand-banner {
-        background: linear-gradient(135deg, #182032 0%, #0e131f 100%);
-        color: #f8fafc;
+        background: linear-gradient(135deg, #241c19 0%, #171210 100%);
+        color: #fcfbf9;
         padding: 18px 26px;
         border-radius: 12px;
         margin-bottom: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 1px solid #24304c;
-        border-left: 5px solid #ff3f6c;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        border-left: 5px solid #c85a32;
+        box-shadow: 0 6px 20px rgba(36, 28, 25, 0.08);
     }
     .brand-title {
         font-size: 23px;
@@ -60,59 +60,57 @@ st.markdown("""
         display: flex;
         align-items: center;
         gap: 12px;
-        color: #f8fafc;
     }
     .brand-logo-badge {
-        background: linear-gradient(45deg, #ff3f6c, #ff527b);
+        background: linear-gradient(45deg, #c85a32, #e07a5f);
         color: #ffffff;
         padding: 4px 12px;
         border-radius: 6px;
         font-size: 14px;
         font-weight: 800;
         letter-spacing: 0.5px;
-        box-shadow: 0 2px 8px rgba(255, 63, 108, 0.4);
     }
     .badge-pill {
-        background: rgba(255, 63, 108, 0.15);
-        color: #ff3f6c;
-        border: 1px solid rgba(255, 63, 108, 0.35);
+        background: rgba(200, 90, 50, 0.18);
+        color: #e07a5f;
+        border: 1px solid rgba(200, 90, 50, 0.35);
         padding: 5px 14px;
         border-radius: 20px;
         font-size: 12px;
         font-weight: 600;
     }
     .filter-status-banner {
-        background: #161d2f;
-        border: 1px solid #263352;
-        border-left: 4px solid #ff3f6c;
+        background: #f3ede4;
+        border: 1px solid #e5dcce;
+        border-left: 4px solid #c85a32;
         padding: 11px 18px;
         border-radius: 8px;
         font-size: 13px;
-        color: #cbd5e1;
+        color: #2b211e;
         margin-bottom: 18px;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
-    /* KPI Metric Cards - Midnight Slate Glass */
+    /* KPI Metric Cards - Warm Ivory & Sandstone */
     .kpi-card {
-        background: #161d2f;
-        border: 1px solid #263352;
+        background: #ffffff;
+        border: 1px solid #e7dfd4;
         border-radius: 12px;
         padding: 18px 20px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        box-shadow: 0 3px 10px rgba(40, 30, 25, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .kpi-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(255, 63, 108, 0.18);
-        border-color: #ff3f6c;
+        box-shadow: 0 8px 18px rgba(40, 30, 25, 0.07);
+        border-color: #d4a373;
     }
     .kpi-label {
         font-size: 11px;
         font-weight: 700;
-        color: #94a3b8;
+        color: #7d6e65;
         letter-spacing: 0.8px;
         text-transform: uppercase;
         margin-bottom: 6px;
@@ -120,12 +118,12 @@ st.markdown("""
     .kpi-val {
         font-size: 26px;
         font-weight: 800;
-        color: #f8fafc;
+        color: #201a18;
         margin-bottom: 4px;
     }
     .kpi-sub {
         font-size: 12px;
-        color: #94a3b8;
+        color: #7d6e65;
         display: flex;
         align-items: center;
         gap: 4px;
@@ -133,11 +131,11 @@ st.markdown("""
 
     /* Quote Cards */
     .verbatim-card {
-        background: #161d2f;
-        border-left: 4px solid #ff3f6c;
-        border-top: 1px solid #263352;
-        border-right: 1px solid #263352;
-        border-bottom: 1px solid #263352;
+        background: #f7f3ed;
+        border-left: 4px solid #c85a32;
+        border-top: 1px solid #eae2d6;
+        border-right: 1px solid #eae2d6;
+        border-bottom: 1px solid #eae2d6;
         padding: 14px 18px;
         border-radius: 0 8px 8px 0;
         margin-bottom: 12px;
@@ -145,13 +143,13 @@ st.markdown("""
     .verbatim-text {
         font-size: 13.5px;
         font-style: italic;
-        color: #e2e8f0;
+        color: #2b211e;
         margin-bottom: 6px;
     }
     .verbatim-meta {
         font-size: 11.5px;
         font-weight: 600;
-        color: #94a3b8;
+        color: #8c7d73;
     }
 
     /* Sidebar Branding & Badges */
@@ -165,13 +163,13 @@ st.markdown("""
         font-size: 21px;
         font-weight: 800;
         letter-spacing: -0.5px;
-        color: #ff3f6c;
+        color: #c85a32;
         margin: 0;
     }
     .sidebar-subtitle {
         font-size: 12px;
         font-weight: 600;
-        color: #94a3b8;
+        color: #7d6e65;
         margin-top: -2px;
         margin-bottom: 10px;
     }
@@ -182,9 +180,9 @@ st.markdown("""
         margin-bottom: 8px;
     }
     .badge-pill-sidebar {
-        background: rgba(255, 63, 108, 0.15);
-        color: #ff3f6c;
-        border: 1px solid rgba(255, 63, 108, 0.3);
+        background: rgba(200, 90, 50, 0.1);
+        color: #c85a32;
+        border: 1px solid rgba(200, 90, 50, 0.25);
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 11.5px;
@@ -195,9 +193,9 @@ st.markdown("""
         width: fit-content;
     }
     .badge-green-sidebar {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
-        border: 1px solid rgba(16, 185, 129, 0.3);
+        background: rgba(42, 157, 143, 0.12);
+        color: #2a9d8f;
+        border: 1px solid rgba(42, 157, 143, 0.3);
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 11.5px;
@@ -579,17 +577,10 @@ with tab_overview:
                 orientation="h",
                 text="Percentage",
                 color="Percentage",
-                color_continuous_scale=["#38bdf8", "#ff3f6c"],
+                color_continuous_scale=["#f5ded6", "#c85a32"],
                 title="Wishlist Behavioral Intent Split (%)"
             )
-            fig_intent.update_layout(
-                showlegend=False,
-                height=280,
-                margin=dict(l=10, r=10, t=40, b=10),
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                font=dict(color="#cbd5e1")
-            )
+            fig_intent.update_layout(showlegend=False, height=280, margin=dict(l=10, r=10, t=40, b=10))
             fig_intent.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
             st.plotly_chart(fig_intent, use_container_width=True)
 
@@ -608,16 +599,10 @@ with tab_overview:
                 names="Friction",
                 values="Percentage",
                 hole=0.45,
-                color_discrete_sequence=["#ff3f6c", "#6366f1", "#38bdf8", "#f59e0b", "#10b981"],
+                color_discrete_sequence=["#c85a32", "#d4a373", "#606c38", "#8d6b94", "#2b211e"],
                 title="Root-Cause Friction Breakdown"
             )
-            fig_fric.update_layout(
-                height=280,
-                margin=dict(l=10, r=10, t=40, b=10),
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                font=dict(color="#cbd5e1")
-            )
+            fig_fric.update_layout(height=280, margin=dict(l=10, r=10, t=40, b=10))
             st.plotly_chart(fig_fric, use_container_width=True)
 
     # Dynamic Workarounds Row
@@ -718,14 +703,9 @@ with tab_insights:
             y="Purchase Probability (%)",
             markers=True,
             title="Wishlist Purchase Intent Decay Over 30 Days",
-            color_discrete_sequence=["#ff3f6c"]
+            color_discrete_sequence=["#c85a32"]
         )
-        fig_curve.add_vline(x=48, line_dash="dash", line_color="#ef4444", annotation_text="Critical Intercept Window (<48h)")
-        fig_curve.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#cbd5e1")
-        )
+        fig_curve.add_vline(x=48, line_dash="dash", line_color="#c85a32", annotation_text="Critical Intercept Window (<48h)")
         st.plotly_chart(fig_curve, use_container_width=True)
 
         st.info("💡 **Key PM Takeaway**: After 48 hours, conviction drops below 30%. Visual & UX product features (such as automated outfit pairability suggestions) must trigger inside the initial 24–48 hour window.")
