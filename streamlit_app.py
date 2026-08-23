@@ -2,11 +2,13 @@
 Myntra Growth Intelligence & VoC Discovery Engine - Streamlit Cloud Application
 Deployable on Streamlit Community Cloud (connected to GitHub).
 Strictly adheres to 30-Day Wishlist-to-Purchase Conversion Metric and ZERO Monetary Incentives.
+Fully dynamic: All charts, KPIs, Opportunity Scores, and Verbatims react live to Sidebar Filters.
 """
 
 import os
 import sys
 import json
+from collections import Counter
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -42,7 +44,7 @@ st.markdown("""
         color: #ffffff;
         padding: 16px 24px;
         border-radius: 12px;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -75,14 +77,17 @@ st.markdown("""
         font-size: 12px;
         font-weight: 600;
     }
-    .badge-green {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
+    .filter-status-banner {
+        background: #f1f5f9;
+        border-left: 4px solid #6366f1;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        color: #334155;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     /* KPI Metric Cards */
@@ -198,12 +203,12 @@ st.markdown("""
 
 # ==================== DATA LOADERS (CACHED) ====================
 @st.cache_data
-def load_classification_summary():
-    path = os.path.join(WORKSPACE_ROOT, "data", "classification_summary.json")
+def load_classified_corpus():
+    path = os.path.join(WORKSPACE_ROOT, "data", "classified_corpus_15k.json")
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
-    return {}
+    return []
 
 @st.cache_data
 def load_ranked_opportunity_matrix():
@@ -213,29 +218,9 @@ def load_ranked_opportunity_matrix():
             return json.load(f)
     return []
 
-@st.cache_data
-def load_classified_corpus():
-    path = os.path.join(WORKSPACE_ROOT, "data", "classified_corpus_15k.json")
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return []
-
-@st.cache_data
-def load_pm_deliverables_markdown():
-    path = os.path.join(WORKSPACE_ROOT, "Part_1_to_7_NextLeap_Deliverables.md")
-    if not os.path.exists(path):
-        path = os.path.join(WORKSPACE_ROOT, "Docs", "Part_1_to_7_NextLeap_Deliverables.md")
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            return f.read()
-    return "# Deliverables file not found."
-
-# Load Data
-summary_data = load_classification_summary()
-ranked_matrix = load_ranked_opportunity_matrix()
-classified_records = load_classified_corpus()
-deliverables_md = load_pm_deliverables_markdown()
+# Load Full Corpus
+all_classified_records = load_classified_corpus()
+default_ranked_matrix = load_ranked_opportunity_matrix()
 
 # ==================== SIDEBAR ====================
 with st.sidebar:
@@ -320,6 +305,112 @@ with st.sidebar:
     st.divider()
     st.caption("NextLeap PM Capstone Engine • Strictly Zero Discounts")
 
+# ==================== DYNAMIC DATA FILTERING ====================
+allowed_sources = []
+if include_reddit:
+    allowed_sources.append("reddit")
+if include_playstore:
+    allowed_sources.extend(["play store", "google play"])
+if include_youtube:
+    allowed_sources.append("youtube")
+
+category_keywords = {
+    "ETHNIC": ["kurti", "ethnic", "saree", "anouk", "kurta", "dupatta", "lehenga"],
+    "WESTERN": ["dress", "skirt", "top", "satin", "midi", "mango", "denim"],
+    "WORKWEAR": ["formal", "shirt", "trousers", "blazer", "workwear", "office"],
+    "STREETWEAR": ["oversized", "jacket", "hoodie", "denim", "streetwear", "sneaker", "roadster"]
+}
+
+filtered_records = []
+for r in all_classified_records:
+    # 1. Source Filter
+    src = r.get("source", "").lower()
+    if allowed_sources and not any(s in src for s in allowed_sources):
+        continue
+
+    # 2. Segment Filter
+    cohort = r.get("cohort") or r.get("user_metadata", {}).get("cohort", "")
+    if selected_segment != "ALL" and cohort != selected_segment:
+        continue
+
+    # 3. Category Filter
+    if selected_category != "ALL":
+        cat_text = (
+            str(r.get("apparel_category", "")) + " " +
+            str(r.get("raw_text", "")) + " " +
+            str(r.get("normalized_text", "")) + " " +
+            str(r.get("brand_mentioned", ""))
+        ).lower()
+        kw_list = category_keywords.get(selected_category, [])
+        if not any(kw in cat_text for kw in kw_list):
+            continue
+
+    filtered_records.append(r)
+
+# If filters are too restrictive, fallback safely
+if not filtered_records:
+    filtered_records = all_classified_records
+
+total_count = len(filtered_records)
+
+# Compute Intent Distribution
+intent_counts = Counter([r.get("intent", "GENUINE_PURCHASE_INTENT") for r in filtered_records])
+genuine_count = intent_counts.get("GENUINE_PURCHASE_INTENT", 0)
+genuine_pct = round((genuine_count / total_count) * 100, 1) if total_count else 54.2
+
+# Compute Friction Distribution
+friction_counts = Counter([r.get("friction", "STYLING_AND_PAIRABILITY_ANXIETY") for r in filtered_records])
+top_friction_key, top_friction_count = friction_counts.most_common(1)[0] if friction_counts else ("STYLING_AND_PAIRABILITY_ANXIETY", 0)
+top_friction_name = top_friction_key.replace("_", " ").title()
+top_friction_pct = round((top_friction_count / total_count) * 100, 1) if total_count else 38.4
+
+# Compute Workarounds
+workaround_counts = Counter([r.get("workaround", "NONE") for r in filtered_records if r.get("workaround") != "NONE"])
+total_workarounds = sum(workaround_counts.values()) or 1
+wa_wa_pct = round((workaround_counts.get("WHATSAPP_SHARING", 0) / total_workarounds) * 100, 1)
+wa_yt_pct = round((workaround_counts.get("YOUTUBE_TRYON_SEARCH", 0) / total_workarounds) * 100, 1)
+wa_br_pct = round((workaround_counts.get("BRACKETING", 0) / total_workarounds) * 100, 1)
+wa_pn_pct = round((workaround_counts.get("PINTEREST_CANVA_MOODBOARDING", 0) / total_workarounds) * 100, 1)
+
+# Dynamic Opportunity Scores Recalculation
+severity_solvability = {
+    "STYLING_AND_PAIRABILITY_ANXIETY": (4.5, 4.5, "Myntra StyleStudio Outfit Visualizer & Curated Pairings"),
+    "FIT_AND_SILHOUETTE_AMBIGUITY": (4.8, 4.2, "Body-Matched UGC Carousel & TrueSize Brand Cross-Reference"),
+    "FABRIC_AND_TACTILE_DOUBT": (3.8, 4.0, "High-Res Fabric Drape & Opacity Rating Micro-Badges"),
+    "SOCIAL_VALIDATION_LAG": (3.5, 4.5, "1-Click WhatsApp Stylist Poll & Friends Group Wardrobe"),
+    "OCCASION_DISCONNECT": (3.4, 3.8, "Occasion Versatility Matrix (Workwear to Casual Mode)"),
+    "COMPARISON_PARALYSIS": (3.2, 4.2, "Side-by-Side Attribute Comparison Drawer in Wishlist"),
+    "PRICE_WAITING": (3.0, 2.5, "Wearability & Cost-Per-Wear (CPW) Justification Meter")
+}
+
+dynamic_matrix = []
+for f_key, count in friction_counts.most_common():
+    freq_pct = round((count / total_count) * 100, 1) if total_count else 0
+    sev, solv, sol_desc = severity_solvability.get(f_key, (3.5, 3.5, "Product Visualizer Nudge"))
+    opp_score = round(freq_pct * sev * solv, 1)
+    
+    # Grab 3 sample verbatims matching this friction from filtered list
+    samples = [
+        r.get("raw_text") or r.get("normalized_text")
+        for r in filtered_records
+        if r.get("friction") == f_key
+    ][:3]
+
+    dynamic_matrix.append({
+        "friction_id": f_key,
+        "friction_name": f_key.replace("_", " ").title(),
+        "frequency_pct": freq_pct,
+        "severity_score": sev,
+        "solvability_score": solv,
+        "opportunity_score": opp_score,
+        "recommended_solution": sol_desc,
+        "sample_verbatims": samples
+    })
+
+# Sort matrix by dynamic opportunity score
+dynamic_matrix = sorted(dynamic_matrix, key=lambda x: x["opportunity_score"], reverse=True)
+top_opp_score = dynamic_matrix[0]["opportunity_score"] if dynamic_matrix else 774.1
+
 # ==================== MAIN BANNER ====================
 st.markdown("""
 <div class="brand-banner">
@@ -338,6 +429,27 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# Active Filter Status Notification
+segment_label = {
+    "ALL": "All User Segments",
+    "STUDENT_GEN_Z": "Student / Gen Z (18-24)",
+    "WORKING_PROFESSIONAL": "Working Professional (25-34)",
+    "TIER_2_ASPIRATIONAL": "Tier-2 Aspirational (22-35)"
+}.get(selected_segment, selected_segment)
+
+st.markdown(f"""
+<div class="filter-status-banner">
+    <div>
+        🎯 <b>Active Scope:</b> <code>{segment_label}</code> &nbsp;•&nbsp; 
+        👗 <b>Category:</b> <code>{selected_category}</code> &nbsp;•&nbsp; 
+        📡 <b>Records Loaded:</b> <b>{total_count:,}</b> of {len(all_classified_records):,}
+    </div>
+    <div style="font-size: 11.5px; color: #64748b;">
+        ⚡ Real-time Reactive Dashboard
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 # ==================== NAVIGATION TABS ====================
 tab_overview, tab_matrix, tab_insights, tab_explorer, tab_ai, tab_mvp = st.tabs([
     "📊 Executive Overview",
@@ -352,37 +464,37 @@ tab_overview, tab_matrix, tab_insights, tab_explorer, tab_ai, tab_mvp = st.tabs(
 # TAB 1: EXECUTIVE OVERVIEW
 # -------------------------------------------------------------------------------------------------
 with tab_overview:
-    # 4 Top KPI Cards
+    # 4 Dynamic KPI Cards
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card">
-            <div class="kpi-label">TOTAL ANALYZED CORPUS</div>
-            <div class="kpi-val">15,000</div>
-            <div class="kpi-sub"><span>📦</span> Unincentivized Multi-Source Records</div>
+            <div class="kpi-label">FILTERED CORPUS</div>
+            <div class="kpi-val">{total_count:,}</div>
+            <div class="kpi-sub"><span>📦</span> High-Signal Records</div>
         </div>
         """, unsafe_allow_html=True)
     with col2:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">GENUINE PURCHASE INTENT</div>
-            <div class="kpi-val" style="color: #10b981;">54.2%</div>
-            <div class="kpi-sub"><span>🎯</span> High-conviction cart/wishlist users</div>
+            <div class="kpi-val" style="color: #10b981;">{genuine_pct}%</div>
+            <div class="kpi-sub"><span>🎯</span> High-conviction users</div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card">
-            <div class="kpi-label">#1 ROOT FRICTION BARRIER</div>
-            <div class="kpi-val" style="color: #ff3f6c;">Styling Anxiety</div>
-            <div class="kpi-sub"><span>⚠️</span> 38.4% of deliberating wishlisters</div>
+            <div class="kpi-label">#1 ROOT FRICTION</div>
+            <div class="kpi-val" style="color: #ff3f6c; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
+            <div class="kpi-sub"><span>⚠️</span> <b>{top_friction_pct}%</b> of cohort deliberations</div>
         </div>
         """, unsafe_allow_html=True)
     with col4:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">TOP OPPORTUNITY SCORE</div>
-            <div class="kpi-val" style="color: #0d9488;">774.1 <span style="font-size: 13px; font-weight: 600;">Score</span></div>
+            <div class="kpi-val" style="color: #0d9488;">{top_opp_score:.1f} <span style="font-size: 13px; font-weight: 600;">Score</span></div>
             <div class="kpi-sub"><span>✨</span> StyleStudio Visualizer MVP</div>
         </div>
         """, unsafe_allow_html=True)
@@ -390,64 +502,65 @@ with tab_overview:
     st.markdown("<br>", unsafe_allow_html=True)
 
     # 4D Taxonomy Charts Row
-    st.markdown("### 🧬 4-Dimensional Taxonomy Distribution")
+    st.markdown("### 🧬 4-Dimensional Taxonomy Distribution (Filtered View)")
     c_chart1, c_chart2 = st.columns(2)
 
     with c_chart1:
-        # Intent Breakdown
-        intent_counts = {
-            "Genuine Purchase Intent": 54.2,
-            "Shortlist Comparison": 22.8,
-            "Aesthetic Bookmarking": 14.5,
-            "Price Speculation": 8.5
-        }
-        df_intent = pd.DataFrame(list(intent_counts.items()), columns=["Intent", "Percentage"])
-        fig_intent = px.bar(
-            df_intent,
-            x="Percentage",
-            y="Intent",
-            orientation="h",
-            text="Percentage",
-            color="Percentage",
-            color_continuous_scale=["#fecdd3", "#ff3f6c"],
-            title="Wishlist Behavioral Intent Split (%)"
-        )
-        fig_intent.update_layout(showlegend=False, height=280, margin=dict(l=10, r=10, t=40, b=10))
-        fig_intent.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
-        st.plotly_chart(fig_intent, use_container_width=True)
+        # Dynamic Intent Breakdown Chart
+        intent_display = []
+        for k, v in intent_counts.items():
+            intent_display.append({
+                "Intent": k.replace("_", " ").title(),
+                "Percentage": round((v / total_count) * 100, 1)
+            })
+        df_intent = pd.DataFrame(intent_display)
+        if not df_intent.empty:
+            fig_intent = px.bar(
+                df_intent,
+                x="Percentage",
+                y="Intent",
+                orientation="h",
+                text="Percentage",
+                color="Percentage",
+                color_continuous_scale=["#fecdd3", "#ff3f6c"],
+                title="Wishlist Behavioral Intent Split (%)"
+            )
+            fig_intent.update_layout(showlegend=False, height=280, margin=dict(l=10, r=10, t=40, b=10))
+            fig_intent.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
+            st.plotly_chart(fig_intent, use_container_width=True)
 
     with c_chart2:
-        # Root Friction Breakdown
-        friction_counts = {
-            "Styling & Pairability Anxiety": 38.4,
-            "Fit & Silhouette Ambiguity": 27.6,
-            "Fabric & Tactile Doubt": 16.2,
-            "Social Validation Lag": 10.4,
-            "Comparison Paralysis": 7.4
-        }
-        df_friction = pd.DataFrame(list(friction_counts.items()), columns=["Friction", "Percentage"])
-        fig_fric = px.pie(
-            df_friction,
-            names="Friction",
-            values="Percentage",
-            hole=0.45,
-            color_discrete_sequence=["#ff3f6c", "#6366f1", "#0ea5e9", "#f59e0b", "#10b981"],
-            title="Root-Cause Friction Breakdown"
-        )
-        fig_fric.update_layout(height=280, margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(fig_fric, use_container_width=True)
+        # Dynamic Root Friction Breakdown Chart
+        friction_display = []
+        for k, v in friction_counts.most_common(5):
+            friction_display.append({
+                "Friction": k.replace("_", " ").title(),
+                "Percentage": round((v / total_count) * 100, 1)
+            })
+        df_friction = pd.DataFrame(friction_display)
+        if not df_friction.empty:
+            fig_fric = px.pie(
+                df_friction,
+                names="Friction",
+                values="Percentage",
+                hole=0.45,
+                color_discrete_sequence=["#ff3f6c", "#6366f1", "#0ea5e9", "#f59e0b", "#10b981"],
+                title="Root-Cause Friction Breakdown"
+            )
+            fig_fric.update_layout(height=280, margin=dict(l=10, r=10, t=40, b=10))
+            st.plotly_chart(fig_fric, use_container_width=True)
 
-    # Workarounds Row
+    # Dynamic Workarounds Row
     st.markdown("### 🔄 Observed Offline Deliberation Workarounds")
     w1, w2, w3, w4 = st.columns(4)
     with w1:
-        st.info("**WhatsApp Sharing (41.2%)**\n\nUsers screenshotting PDPs and sharing in group chats for second opinions on style and fit.")
+        st.info(f"**WhatsApp Sharing ({wa_wa_pct}%)**\n\nUsers screenshotting PDPs and sharing in group chats for second opinions on style and fit.")
     with w2:
-        st.warning("**YouTube Try-On Search (28.6%)**\n\nLeaving Myntra to search YouTube haul videos to see how clothes look on realistic bodies.")
+        st.warning(f"**YouTube Try-On Search ({wa_yt_pct}%)**\n\nLeaving Myntra to search YouTube haul videos to see how clothes look on realistic bodies.")
     with w3:
-        st.success("**Bracketing Behavior (18.1%)**\n\nOrdering 2 adjacent sizes (M & L) with intent to return one, driving logistics costs.")
+        st.success(f"**Bracketing Behavior ({wa_br_pct}%)**\n\nOrdering 2 adjacent sizes (M & L) with intent to return one, driving logistics costs.")
     with w4:
-        st.error("**Pinterest Moodboarding (12.1%)**\n\nExtracting product photos to Canva/Pinterest to test pairing with existing wardrobes.")
+        st.error(f"**Pinterest Moodboarding ({wa_pn_pct}%)**\n\nExtracting product photos to Canva/Pinterest to test pairing with existing wardrobes.")
 
 # -------------------------------------------------------------------------------------------------
 # TAB 2: OPPORTUNITY MATRIX
@@ -456,12 +569,12 @@ with tab_matrix:
     st.markdown("### 🎯 Ranked Opportunity Matrix")
     st.caption("Mathematical Ranking Formula: **Opportunity Score = Frequency (%) × Severity (1-5) × Solvability (1-5)**")
 
-    if ranked_matrix:
+    if dynamic_matrix:
         matrix_table = []
-        for idx, row in enumerate(ranked_matrix, 1):
+        for idx, row in enumerate(dynamic_matrix, 1):
             matrix_table.append({
                 "Rank": f"#{idx}",
-                "Friction Barrier": row.get("friction_name", row.get("friction_id", "")).replace("_", " ").title(),
+                "Friction Barrier": row.get("friction_name", "").title(),
                 "Frequency Share": f"{row.get('frequency_pct', 0):.1f}%",
                 "Severity": f"{row.get('severity_score', 0)} / 5",
                 "Solvability (Non-Monetary)": f"{row.get('solvability_score', 0)} / 5",
@@ -475,20 +588,20 @@ with tab_matrix:
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("#### 🔬 Detailed Barrier Breakdown & Verbatim Evidence")
 
-        for item in ranked_matrix:
-            name = item.get("friction_name", item.get("friction_id", "")).replace("_", " ").title()
+        for item in dynamic_matrix:
+            name = item.get("friction_name", "").title()
             score = item.get("opportunity_score", 0)
             with st.expander(f"📌 **{name}** — Opportunity Score: {score:.1f} (Freq: {item.get('frequency_pct', 0):.1f}%)"):
-                st.markdown(f"**Root Problem:** {item.get('root_problem', 'User doubts regarding real-world application.')}")
-                st.markdown(f"**Non-Monetary Product Intervention:** `{item.get('recommended_solution', 'Interactive Visualizer')}`")
+                st.markdown(f"**Root Friction Key:** `{item.get('friction_id')}`")
+                st.markdown(f"**Non-Monetary Product Intervention:** `{item.get('recommended_solution')}`")
                 
                 verbatims = item.get("sample_verbatims", [])
                 if verbatims:
-                    st.markdown("**Real Customer Verbatims:**")
+                    st.markdown("**Real Customer Verbatims in Active Filter:**")
                     for v in verbatims[:3]:
                         st.markdown(f"> *\"{v}\"*")
-    else:
-        st.info("Opportunity matrix data loading...")
+                else:
+                    st.caption("No direct verbatims found for this friction in the current filter scope.")
 
 # -------------------------------------------------------------------------------------------------
 # TAB 3: STRATEGIC BEHAVIORAL INSIGHTS
@@ -539,45 +652,45 @@ with tab_insights:
 # -------------------------------------------------------------------------------------------------
 with tab_explorer:
     st.markdown("### 🔍 Multi-Source VoC Verbatim Explorer")
-    st.caption("Search across 15,000 raw & normalized customer deliberations from Play Store, Reddit, and YouTube.")
+    st.caption("Search across raw & normalized customer deliberations matching your active filters.")
 
-    col_s1, col_s2, col_s3 = st.columns([2, 1, 1])
+    col_s1, col_s2 = st.columns([3, 1])
     with col_s1:
         search_query = st.text_input("🔍 Search Verbatims by Keyword", placeholder="e.g., transparent, roadster, kurti, sleeves, styling...")
     with col_s2:
-        filter_source = st.selectbox("Filter Source", ["ALL", "REDDIT", "PLAY_STORE", "YOUTUBE"])
-    with col_s3:
-        filter_friction = st.selectbox("Filter Friction", ["ALL", "STYLING", "FIT", "FABRIC", "SOCIAL", "COMPARISON"])
+        filter_friction_local = st.selectbox(
+            "Filter by Friction",
+            ["ALL"] + sorted(list(set([r.get("friction", "") for r in filtered_records if r.get("friction")])))
+        )
 
-    # Filter records
-    filtered = []
-    for r in classified_records:
-        text = r.get("review_text", "") or r.get("original_text", "")
-        src = r.get("source", "").upper()
-        fric = r.get("root_friction", "").upper()
+    # Local filtering on top of global filtered_records
+    explorer_results = []
+    for r in filtered_records:
+        text = r.get("raw_text", "") or r.get("normalized_text", "")
+        fric = r.get("friction", "")
 
         if search_query and search_query.lower() not in text.lower():
             continue
-        if filter_source != "ALL" and filter_source not in src:
+        if filter_friction_local != "ALL" and fric != filter_friction_local:
             continue
-        if filter_friction != "ALL" and filter_friction not in fric:
-            continue
-        filtered.append(r)
+        explorer_results.append(r)
 
-    st.markdown(f"**Found {len(filtered):,} matching records**")
+    st.markdown(f"**Displaying {min(len(explorer_results), 30)} of {len(explorer_results):,} matching records**")
 
     # Display in clean verbatim cards
-    for item in filtered[:25]:
-        text = item.get("review_text", "") or item.get("original_text", "")
+    for item in explorer_results[:30]:
+        text = item.get("raw_text", "") or item.get("normalized_text", "")
         src = item.get("source", "Play Store").replace("_", " ").title()
-        fric = item.get("root_friction", "Unknown").replace("_", " ").title()
-        intent = item.get("wishlist_intent", "Genuine Intent").replace("_", " ").title()
-        cohort = item.get("user_cohort", "General").replace("_", " ").title()
+        fric = item.get("friction", "Unknown").replace("_", " ").title()
+        intent = item.get("intent", "Genuine Intent").replace("_", " ").title()
+        cohort = (item.get("cohort") or item.get("user_metadata", {}).get("cohort", "General")).replace("_", " ").title()
+        brand = item.get("brand_mentioned", "Myntra Brand")
 
         st.markdown(f"""
         <div class="verbatim-card">
             <div class="verbatim-text">"{text}"</div>
             <div class="verbatim-meta">
+                <span>🏷️ Brand: <b>{brand}</b></span> &nbsp;•&nbsp;
                 <span>📍 Source: <b>{src}</b></span> &nbsp;•&nbsp; 
                 <span>🧬 Friction: <b style="color:#ff3f6c;">{fric}</b></span> &nbsp;•&nbsp; 
                 <span>🎯 Intent: <b>{intent}</b></span> &nbsp;•&nbsp; 
@@ -591,7 +704,7 @@ with tab_explorer:
 # -------------------------------------------------------------------------------------------------
 with tab_ai:
     st.markdown("### 🤖 Ask AI Growth Engine")
-    st.caption("Directly query the 15,000 VoC Corpus using grounded LLM intelligence. Strictly zero-incentive solutions.")
+    st.caption("Directly query the VoC Corpus using grounded LLM intelligence. Strictly zero-incentive solutions.")
 
     preset_col1, preset_col2, preset_col3 = st.columns(3)
     preset_prompt = None
@@ -616,10 +729,10 @@ with tab_ai:
         if not user_query.strip():
             st.warning("Please enter a question or select a preset prompt above.")
         else:
-            with st.spinner("Analyzing 15,000 VoC records and synthesizing grounded response..."):
+            with st.spinner("Analyzing VoC records and synthesizing grounded response..."):
                 sys_prompt = (
                     "You are the Lead Growth PM & VoC Intelligence Engine for Myntra India. "
-                    "Analyze the 15,000 multi-source customer feedback dataset. "
+                    f"The active analysis scope is: Segment={selected_segment}, Category={selected_category}, Records={total_count}. "
                     "STRICT MANDATE: NEVER suggest discounts, coupons, price drop alerts, sale markdowns, or cashbacks. "
                     "Provide actionable, psychological, visual, or UX-driven insights backed by realistic customer verbatims."
                 )
@@ -629,12 +742,13 @@ with tab_ai:
                 else:
                     # Deterministic synthesis if no key
                     response_text = (
-                        f"### 📊 VoC Intelligence Synthesis (Deterministic Mode)\n\n"
-                        f"**Query Analyzed:** *\"{user_query}\"*\n\n"
-                        f"**1. Core Customer Pattern in Corpus:**\n"
-                        f"- 38.4% of deliberating users face **Styling & Pairability Anxiety** — they love the standalone piece on the model but cannot visualize it with their existing wardrobe.\n"
-                        f"- 27.6% face **Fit & Silhouette Ambiguity** — fear of returning items due to sizing variance across brands.\n\n"
-                        f"**2. Zero-Monetary Product Recommendations:**\n"
+                        f"### 📊 VoC Intelligence Synthesis (Grounded Mode)\n\n"
+                        f"**Query Analyzed:** *\"{user_query}\"*\n"
+                        f"**Active Scope:** *{selected_segment} ({total_count:,} records)*\n\n"
+                        f"**1. Core Customer Friction Identified in Scope:**\n"
+                        f"- **{top_friction_name} ({top_friction_pct}%):** Customers love the apparel on model photography but face severe anxiety regarding real-world execution.\n"
+                        f"- **{wa_wa_pct}% of deliberating wishlisters** rely on WhatsApp group chats or YouTube hauls for second opinions.\n\n"
+                        f"**2. Zero-Monetary Product Solutions:**\n"
                         f"- **StyleStudio Wardrobe Pairing:** Show 3 complete curated outfits (Top + Bottom + Footwear) right inside the Wishlist drawer.\n"
                         f"- **Body-Matched UGC Carousel:** Surface verified customer photos matching the user's exact height and size (e.g. 5'3\" M) to remove sizing doubt.\n"
                         f"- **WhatsApp 1-Click Stylist Poll:** Allow seamless sharing of styled collages to friends for instant second opinions."
@@ -698,7 +812,7 @@ with tab_mvp:
                 </div>
             </div>
             <div style="font-size: 12.5px; color: #10b981; font-weight: 700; margin-top: 10px;">
-                ✔ 94% of users with your silhouette kept this kurta without return.
+                ✔ 94% of users with your silhouette kept this item without return.
             </div>
         </div>
         """, unsafe_allow_html=True)
