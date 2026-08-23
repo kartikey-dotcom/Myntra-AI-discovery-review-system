@@ -545,9 +545,9 @@ with tab_matrix:
                 "Friction Barrier": row.get("friction_name", "").title(),
                 "Frequency Share": f"{row.get('frequency_pct', 0):.1f}%",
                 "Severity": f"{row.get('severity_score', 0)} / 5",
-                "Solvability (Non-Monetary)": f"{row.get('solvability_score', 0)} / 5",
+                "Product Solvability": f"{row.get('solvability_score', 0)} / 5",
                 "Opportunity Score": f"{row.get('opportunity_score', 0):.1f}",
-                "Core Product Solution": row.get("recommended_solution", "StyleStudio Nudge")
+                "Recommended Solution": row.get("recommended_solution", "StyleStudio Feature")
             })
         
         df_matrix = pd.DataFrame(matrix_table)
@@ -560,8 +560,8 @@ with tab_matrix:
             name = item.get("friction_name", "").title()
             score = item.get("opportunity_score", 0)
             with st.expander(f"📌 **{name}** — Opportunity Score: {score:.1f} (Freq: {item.get('frequency_pct', 0):.1f}%)"):
-                st.markdown(f"**Root Friction Key:** `{item.get('friction_id')}`")
-                st.markdown(f"**Non-Monetary Product Intervention:** `{item.get('recommended_solution')}`")
+                st.markdown(f"**Root Friction:** `{item.get('friction_id')}`")
+                st.markdown(f"**Recommended Product Solution:** `{item.get('recommended_solution')}`")
                 
                 verbatims = item.get("sample_verbatims", [])
                 if verbatims:
@@ -613,7 +613,7 @@ with tab_insights:
         fig_curve.add_vline(x=48, line_dash="dash", line_color="#ef4444", annotation_text="Critical Intercept Window (<48h)")
         st.plotly_chart(fig_curve, use_container_width=True)
 
-        st.info("💡 **Key PM Takeaway**: After 48 hours, conviction drops below 30%. Non-monetary interventions (such as automated outfit pairability suggestions) must trigger inside the initial 24–48 hour window.")
+        st.info("💡 **Key PM Takeaway**: After 48 hours, conviction drops below 30%. Visual & UX product features (such as automated outfit pairability suggestions) must trigger inside the initial 24–48 hour window.")
 
 # -------------------------------------------------------------------------------------------------
 # TAB 4: VOC VERBATIM EXPLORER
