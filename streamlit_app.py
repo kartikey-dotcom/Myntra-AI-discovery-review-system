@@ -819,12 +819,12 @@ with tab_ai:
                         f"**1. Core Customer Behavioral Patterns:**\n"
                         f"- **{top_friction_name} ({top_friction_pct}% Frequency):** Customer verbatims reveal high initial aesthetic interest, but deliberation stalls because users cannot visualize real-world styling with their existing wardrobe staples.\n"
                         f"- **{wa_wa_pct}% of deliberating wishlisters** rely on WhatsApp group chats or YouTube hauls for second opinions, causing multi-day drop-off.\n\n"
-                        f"**2. Zero-Monetary Product Interventions:**\n"
+                        f"**2. Recommended Product & UX Solutions:**\n"
                         f"- **StyleStudio Lookbook Drawer:** Interactive 3-way pairing (Top + Bottom + Footwear) embedded directly inside the Wishlist to eliminate styling paralysis.\n"
                         f"- **Body-Matched UGC Carousel:** Verified customer photos matching the shopper's height & silhouette to remove sizing ambiguity.\n"
                         f"- **1-Click WhatsApp Stylist Poll:** Interactive poll sticker collapsing the 72h offline validation cycle to <15 mins.\n\n"
                         f"**3. Metric Impact on 30-Day Conversion:**\n"
-                        f"- Increases wishlist-to-cart progression from baseline **24.5%** to **68.2%** (+43.7% lift) without any monetary discounts."
+                        f"- Increases wishlist-to-cart progression from baseline **24.5%** to **68.2%** (+43.7% lift) via visual & social conviction."
                     )
 
                 st.markdown("---")
