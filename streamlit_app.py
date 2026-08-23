@@ -39,18 +39,18 @@ st.markdown("""
         color: #201a18;
     }
 
-    /* Top Brand Banner - Curvy Editorial */
+    /* Top Brand Banner - Warm Editorial Espresso */
     .brand-banner {
         background: linear-gradient(135deg, #241c19 0%, #171210 100%);
         color: #fcfbf9;
-        padding: 20px 28px;
-        border-radius: 24px;
-        margin-bottom: 22px;
+        padding: 18px 26px;
+        border-radius: 12px;
+        margin-bottom: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-left: 6px solid #c85a32;
-        box-shadow: 0 8px 24px rgba(36, 28, 25, 0.08);
+        border-left: 5px solid #c85a32;
+        box-shadow: 0 6px 20px rgba(36, 28, 25, 0.08);
     }
     .brand-title {
         font-size: 23px;
@@ -64,8 +64,8 @@ st.markdown("""
     .brand-logo-badge {
         background: linear-gradient(45deg, #c85a32, #e07a5f);
         color: #ffffff;
-        padding: 6px 14px;
-        border-radius: 12px;
+        padding: 4px 12px;
+        border-radius: 6px;
         font-size: 14px;
         font-weight: 800;
         letter-spacing: 0.5px;
@@ -74,37 +74,37 @@ st.markdown("""
         background: rgba(200, 90, 50, 0.18);
         color: #e07a5f;
         border: 1px solid rgba(200, 90, 50, 0.35);
-        padding: 6px 16px;
-        border-radius: 30px;
+        padding: 5px 14px;
+        border-radius: 20px;
         font-size: 12px;
         font-weight: 600;
     }
     .filter-status-banner {
         background: #f3ede4;
         border: 1px solid #e5dcce;
-        border-left: 5px solid #c85a32;
-        padding: 13px 20px;
-        border-radius: 18px;
+        border-left: 4px solid #c85a32;
+        padding: 11px 18px;
+        border-radius: 8px;
         font-size: 13px;
         color: #2b211e;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
-    /* KPI Metric Cards - Curvy Sandstone */
+    /* KPI Metric Cards - Warm Ivory & Sandstone */
     .kpi-card {
         background: #ffffff;
         border: 1px solid #e7dfd4;
-        border-radius: 20px;
-        padding: 20px 22px;
-        box-shadow: 0 4px 14px rgba(40, 30, 25, 0.04);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        border-radius: 12px;
+        padding: 18px 20px;
+        box-shadow: 0 3px 10px rgba(40, 30, 25, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .kpi-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 22px rgba(40, 30, 25, 0.08);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(40, 30, 25, 0.07);
         border-color: #d4a373;
     }
     .kpi-label {
@@ -129,24 +129,22 @@ st.markdown("""
         gap: 4px;
     }
 
-    /* Quote Cards - Curvy Bubbles */
+    /* Quote Cards */
     .verbatim-card {
         background: #f7f3ed;
-        border-left: 5px solid #c85a32;
+        border-left: 4px solid #c85a32;
         border-top: 1px solid #eae2d6;
         border-right: 1px solid #eae2d6;
         border-bottom: 1px solid #eae2d6;
-        padding: 16px 20px;
-        border-radius: 18px;
-        margin-bottom: 14px;
-        box-shadow: 0 2px 8px rgba(40, 30, 25, 0.02);
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 12px;
     }
     .verbatim-text {
         font-size: 13.5px;
         font-style: italic;
         color: #2b211e;
-        margin-bottom: 8px;
-        line-height: 1.45;
+        margin-bottom: 6px;
     }
     .verbatim-meta {
         font-size: 11.5px;
@@ -154,121 +152,58 @@ st.markdown("""
         color: #8c7d73;
     }
 
-    /* Complete Curvy Floating Tab Navigation */
-    div[data-testid="stTabs"] [data-baseweb="tab-highlight"],
-    div[data-testid="stTabs"] [data-baseweb="tab-border"],
-    .stTabs [data-baseweb="tab-highlight"],
-    .stTabs [data-baseweb="tab-border"] {
-        display: none !important;
-        height: 0px !important;
-        visibility: hidden !important;
-    }
-    div[data-testid="stTabs"] [data-baseweb="tab-list"],
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px !important;
-        background-color: #efe8df !important;
-        padding: 6px 10px !important;
-        border-radius: 30px !important;
-        border: 1px solid #e2dacd !important;
-        margin-bottom: 22px !important;
-        border-bottom: none !important;
-    }
-    div[data-testid="stTabs"] button[role="tab"],
-    div[data-testid="stTabs"] [data-baseweb="tab"],
-    .stTabs button[role="tab"],
-    .stTabs [data-baseweb="tab"] {
-        height: 42px !important;
-        white-space: pre-wrap !important;
-        background-color: transparent !important;
-        border-radius: 24px !important;
-        color: #7d6e65 !important;
-        font-size: 13.5px !important;
-        font-weight: 700 !important;
-        padding: 8px 18px !important;
-        border: none !important;
-        outline: none !important;
-        transition: all 0.2s ease !important;
-    }
-    div[data-testid="stTabs"] button[role="tab"]:hover,
-    .stTabs [data-baseweb="tab"]:hover {
-        color: #c85a32 !important;
-        background-color: rgba(255,255,255,0.5) !important;
-        border-radius: 24px !important;
-    }
-    div[data-testid="stTabs"] button[role="tab"][aria-selected="true"],
-    div[data-testid="stTabs"] [data-baseweb="tab"][aria-selected="true"],
-    .stTabs [aria-selected="true"] {
-        background-color: #ffffff !important;
-        color: #c85a32 !important;
-        border-radius: 24px !important;
-        box-shadow: 0 4px 14px rgba(40, 30, 25, 0.1) !important;
-        border: 1px solid #e0d6c8 !important;
-        border-bottom: 1px solid #e0d6c8 !important;
-    }
-
-    /* Curvy Workaround Cards */
-    .workaround-card {
-        background: #ffffff;
-        border: 1px solid #e7dfd4;
-        border-radius: 18px;
-        padding: 18px;
-        height: 100%;
-        box-shadow: 0 3px 10px rgba(40,30,25,0.03);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .workaround-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 18px rgba(40,30,25,0.07);
-    }
-    .workaround-header {
+    /* Sidebar Branding & Badges */
+    .sidebar-brand {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    .sidebar-logo-text {
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: #c85a32;
+        margin: 0;
+    }
+    .sidebar-subtitle {
+        font-size: 12px;
+        font-weight: 600;
+        color: #7d6e65;
+        margin-top: -2px;
         margin-bottom: 10px;
     }
-    .workaround-title {
-        font-size: 13.5px;
-        font-weight: 700;
-        color: #201a18;
+    .sidebar-badge-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 8px;
     }
-    .workaround-badge {
-        background: #f4ede3;
+    .badge-pill-sidebar {
+        background: rgba(200, 90, 50, 0.1);
         color: #c85a32;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: 800;
+        border: 1px solid rgba(200, 90, 50, 0.25);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        width: fit-content;
     }
-    .workaround-desc {
-        font-size: 12px;
-        color: #6d5e54;
-        line-height: 1.45;
-    }
-
-    /* Curvy Streamlit Inputs & Buttons */
-    .stButton > button {
-        border-radius: 24px !important;
-        font-weight: 700 !important;
-        transition: all 0.2s ease !important;
-        padding: 8px 20px !important;
-    }
-    .stButton > button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(200, 90, 50, 0.2) !important;
-    }
-    button[kind="primary"] {
-        border-radius: 28px !important;
-        box-shadow: 0 4px 14px rgba(200, 90, 50, 0.25) !important;
-    }
-    .stTextArea textarea, .stTextInput input, [data-baseweb="select"] {
-        border-radius: 16px !important;
-    }
-    [data-testid="stExpander"] {
-        border-radius: 18px !important;
-        border: 1px solid #e7dfd4 !important;
-        background-color: #ffffff !important;
-        overflow: hidden !important;
-        margin-bottom: 10px !important;
+    .badge-green-sidebar {
+        background: rgba(42, 157, 143, 0.12);
+        color: #2a9d8f;
+        border: 1px solid rgba(42, 157, 143, 0.3);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        width: fit-content;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -587,7 +522,7 @@ with tab_overview:
             card1_sub = f"<span>🎯</span> Active <b>{segment_label}</b> Scope"
 
         st.markdown(f"""
-        <div class="kpi-card" style="border-top: 3.5px solid #c85a32;">
+        <div class="kpi-card">
             <div class="kpi-label">{card1_label}</div>
             <div class="kpi-val">{card1_val}</div>
             <div class="kpi-sub">{card1_sub}</div>
@@ -595,27 +530,27 @@ with tab_overview:
         """, unsafe_allow_html=True)
     with col2:
         st.markdown(f"""
-        <div class="kpi-card" style="border-top: 3.5px solid #2a9d8f;">
+        <div class="kpi-card">
             <div class="kpi-label">GENUINE PURCHASE INTENT</div>
-            <div class="kpi-val" style="color: #2a9d8f;">{genuine_pct}%</div>
+            <div class="kpi-val" style="color: #10b981;">{genuine_pct}%</div>
             <div class="kpi-sub"><span>🎯</span> High-conviction users</div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown(f"""
-        <div class="kpi-card" style="border-top: 3.5px solid #e07a5f;">
+        <div class="kpi-card">
             <div class="kpi-label">#1 ROOT FRICTION</div>
-            <div class="kpi-val" style="color: #c85a32; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
+            <div class="kpi-val" style="color: #ff3f6c; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
             <div class="kpi-sub"><span>⚠️</span> <b>{top_friction_pct}%</b> of cohort deliberations</div>
         </div>
         """, unsafe_allow_html=True)
     with col4:
         top_sol_title = dynamic_matrix[0].get("solution_title", "StyleStudio Lookbook") if dynamic_matrix else "StyleStudio Lookbook"
         st.markdown(f"""
-        <div class="kpi-card" style="border-top: 3.5px solid #d4a373;">
+        <div class="kpi-card">
             <div class="kpi-label">#1 RECOMMENDED SOLUTION</div>
-            <div class="kpi-val" style="color: #c85a32; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
-            <div class="kpi-sub" style="color: #2a9d8f;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
+            <div class="kpi-val" style="color: #0d9488; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
+            <div class="kpi-sub" style="color: #10b981;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -670,57 +605,17 @@ with tab_overview:
             fig_fric.update_layout(height=280, margin=dict(l=10, r=10, t=40, b=10))
             st.plotly_chart(fig_fric, use_container_width=True)
 
-    # Dynamic Workarounds Row - Custom Luxury Cards
+    # Dynamic Workarounds Row
     st.markdown("### 🔄 Observed Offline Deliberation Workarounds")
     w1, w2, w3, w4 = st.columns(4)
     with w1:
-        st.markdown(f"""
-        <div class="workaround-card" style="border-left: 3.5px solid #25d366;">
-            <div class="workaround-header">
-                <span class="workaround-title">💬 WhatsApp Polls</span>
-                <span class="workaround-badge">{wa_wa_pct}%</span>
-            </div>
-            <div class="workaround-desc">
-                Screenshotting PDPs to share in group chats for second opinions on outfit styling and fit.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.info(f"**WhatsApp Sharing ({wa_wa_pct}%)**\n\nUsers screenshotting PDPs and sharing in group chats for second opinions on style and fit.")
     with w2:
-        st.markdown(f"""
-        <div class="workaround-card" style="border-left: 3.5px solid #e07a5f;">
-            <div class="workaround-header">
-                <span class="workaround-title">▶️ YouTube Hauls</span>
-                <span class="workaround-badge">{wa_yt_pct}%</span>
-            </div>
-            <div class="workaround-desc">
-                Leaving Myntra to search try-on hauls to see how garments look on realistic Indian body types.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.warning(f"**YouTube Try-On Search ({wa_yt_pct}%)**\n\nLeaving Myntra to search YouTube haul videos to see how clothes look on realistic bodies.")
     with w3:
-        st.markdown(f"""
-        <div class="workaround-card" style="border-left: 3.5px solid #3d8b7a;">
-            <div class="workaround-header">
-                <span class="workaround-title">📦 Size Bracketing</span>
-                <span class="workaround-badge">{wa_br_pct}%</span>
-            </div>
-            <div class="workaround-desc">
-                Ordering 2 adjacent sizes (M & L) with deliberate intent to return one, driving logistics costs.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.success(f"**Bracketing Behavior ({wa_br_pct}%)**\n\nOrdering 2 adjacent sizes (M & L) with intent to return one, driving logistics costs.")
     with w4:
-        st.markdown(f"""
-        <div class="workaround-card" style="border-left: 3.5px solid #d4a373;">
-            <div class="workaround-header">
-                <span class="workaround-title">📌 Moodboarding</span>
-                <span class="workaround-badge">{wa_pn_pct}%</span>
-            </div>
-            <div class="workaround-desc">
-                Exporting apparel images to Canva/Pinterest to visualize pairings with existing wardrobes.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.error(f"**Pinterest Moodboarding ({wa_pn_pct}%)**\n\nExtracting product photos to Canva/Pinterest to test pairing with existing wardrobes.")
 
 # -------------------------------------------------------------------------------------------------
 # TAB 2: OPPORTUNITY MATRIX
@@ -860,7 +755,7 @@ with tab_explorer:
             <div class="verbatim-meta">
                 <span>🏷️ Brand: <b>{brand}</b></span> &nbsp;•&nbsp;
                 <span>📍 Source: <b>{src}</b></span> &nbsp;•&nbsp; 
-                <span>🧬 Friction: <b style="color:#c85a32;">{fric}</b></span> &nbsp;•&nbsp; 
+                <span>🧬 Friction: <b style="color:#ff3f6c;">{fric}</b></span> &nbsp;•&nbsp; 
                 <span>🎯 Intent: <b>{intent}</b></span> &nbsp;•&nbsp; 
                 <span>👤 Cohort: <b>{cohort}</b></span>
             </div>
