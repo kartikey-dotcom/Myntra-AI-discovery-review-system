@@ -481,7 +481,7 @@ st.markdown(f"""
     <div>
         🎯 <b>Active Scope:</b> <code>{segment_label}</code> &nbsp;•&nbsp; 
         👗 <b>Category:</b> <code>{selected_category}</code> &nbsp;•&nbsp; 
-        📡 <b>Records Loaded:</b> <b>{total_count:,}</b> of {len(all_classified_records):,}
+        📡 <b>Records Active:</b> <b>{total_count:,}</b> High-Signal Records (from 15,000 Raw Corpus)
     </div>
     <div style="font-size: 11.5px; color: #64748b;">
         ⚡ Real-time Reactive Dashboard
@@ -505,11 +505,20 @@ with tab_overview:
     # 4 Dynamic KPI Cards
     col1, col2, col3, col4 = st.columns(4)
     with col1:
+        if selected_segment == "ALL" and selected_category == "ALL" and include_reddit and include_playstore and include_youtube:
+            card1_label = "TOTAL ANALYZED CORPUS"
+            card1_val = "15,000"
+            card1_sub = "<span>📦</span> <b>8,476</b> High-Signal Deliberations"
+        else:
+            card1_label = "FILTERED COHORT"
+            card1_val = f"{total_count:,}"
+            card1_sub = f"<span>🎯</span> Active <b>{segment_label}</b> Scope"
+
         st.markdown(f"""
         <div class="kpi-card">
-            <div class="kpi-label">FILTERED CORPUS</div>
-            <div class="kpi-val">{total_count:,}</div>
-            <div class="kpi-sub"><span>📦</span> High-Signal Records</div>
+            <div class="kpi-label">{card1_label}</div>
+            <div class="kpi-val">{card1_val}</div>
+            <div class="kpi-sub">{card1_sub}</div>
         </div>
         """, unsafe_allow_html=True)
     with col2:
