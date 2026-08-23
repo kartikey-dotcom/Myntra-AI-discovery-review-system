@@ -490,13 +490,12 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==================== NAVIGATION TABS ====================
-tab_overview, tab_matrix, tab_insights, tab_explorer, tab_ai, tab_mvp = st.tabs([
+tab_overview, tab_matrix, tab_insights, tab_explorer, tab_ai = st.tabs([
     "📊 Executive Overview",
     "🎯 Opportunity Matrix",
     "🧠 Strategic Insights",
     "🔍 VoC Verbatim Explorer",
-    "🤖 Ask AI Growth Engine",
-    "👗 StyleStudio MVP Demo"
+    "🤖 Ask AI Growth Engine"
 ])
 
 # -------------------------------------------------------------------------------------------------
@@ -851,77 +850,6 @@ with tab_ai:
                 st.markdown("---")
                 st.markdown("#### 💡 AI Intelligence Output:")
                 st.markdown(response_text)
-
-# -------------------------------------------------------------------------------------------------
-# TAB 6: STYLESTUDIO MVP DEMO
-# -------------------------------------------------------------------------------------------------
-with tab_mvp:
-    st.markdown("### 👗 Myntra \"StyleStudio\" MVP Interactive Simulator")
-    st.markdown("**The #1 Ranked Solution for Styling Anxiety & Fit Ambiguity (Strictly Zero Discounts).**")
-
-    sim_col1, sim_col2 = st.columns([1, 1])
-
-    with sim_col1:
-        st.markdown("#### 1. Select Wishlist Hero Item")
-        hero_item = st.selectbox(
-            "Wishlisted Apparel",
-            [
-                "Anouk Rust Orange Embroidered Kurta (Rs. 1,499)",
-                "Roadster Oversized Denim Jacket (Rs. 2,199)",
-                "Mango Emerald Green Satin Midi Dress (Rs. 3,490)",
-                "Tokyo Talkies Floral Tiered Maxi Skirt (Rs. 1,299)"
-            ]
-        )
-
-        st.markdown("#### 2. Interactive StyleStudio Pairings")
-        col_p1, col_p2 = st.columns(2)
-        with col_p1:
-            bottom_pairing = st.selectbox("Pair Bottom", ["Off-White Straight Palazzos", "Raw Hem Ankle Jeans", "Gold Tissue Cigarette Pants", "Black Tailored Trousers"])
-        with col_p2:
-            footwear_pairing = st.selectbox("Pair Footwear", ["Tan Kolhapuri Juttis", "Chunky White Sneakers", "Strappy Block Heels", "Nude Pointed Pumps"])
-
-        st.markdown("#### 3. Body-Matched UGC Filter")
-        user_height = st.select_slider("Your Height:", options=["4'11\"", "5'1\"", "5'3\"", "5'5\"", "5'7\"", "5'9\""], value="5'3\"")
-        user_body = st.radio("Body Silhouette:", ["Petite", "Pear Shape / Curvy", "Athletic / Rectangle", "Hourglass"], horizontal=True)
-
-        st.success(f"✨ **Showing 42 Verified Reviews & Photos matching: {user_height} • {user_body}**")
-
-    with sim_col2:
-        st.markdown("#### 4. Live Outfit Visualizer Canvas")
-        st.markdown(f"""
-        <div style="background: #ffffff; border: 2px dashed #ff3f6c; border-radius: 12px; padding: 20px; text-align: center;">
-            <div style="font-size: 16px; font-weight: 700; color: #282c3f; margin-bottom: 8px;">
-                ✨ Complete Curated Look: "Effortless Fusion"
-            </div>
-            <div style="display: flex; justify-content: center; gap: 10px; margin: 15px 0;">
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 600;">
-                    🧥 <b>Hero</b><br>{hero_item.split('(')[0]}
-                </div>
-                <div style="font-size: 20px; align-self: center;">+</div>
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 600;">
-                    👖 <b>Bottom</b><br>{bottom_pairing}
-                </div>
-                <div style="font-size: 20px; align-self: center;">+</div>
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 600;">
-                    👡 <b>Footwear</b><br>{footwear_pairing}
-                </div>
-            </div>
-            <div style="font-size: 12.5px; color: #10b981; font-weight: 700; margin-top: 10px;">
-                ✔ 94% of users with your silhouette kept this item without return.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("#### 5. Conviction Simulator (Wishlist to Purchase)")
-        
-        col_g1, col_g2 = st.columns(2)
-        with col_g1:
-            st.metric("Baseline Wishlist Conviction", "24.5%", delta="-13.9% (Drop-off)")
-        with col_g2:
-            st.metric("StyleStudio Visualizer Conviction", "68.2%", delta="+43.7% (Instant Add to Cart)")
-
-        st.button("🛒 Buy Complete Look (1-Click Bundle)", type="primary", use_container_width=True)
 
 # ==================== FOOTER ====================
 st.markdown("---")
