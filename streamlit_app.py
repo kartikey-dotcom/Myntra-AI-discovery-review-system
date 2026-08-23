@@ -271,39 +271,10 @@ with st.sidebar:
     include_youtube = st.checkbox("YouTube Try-On Hauls", value=True)
 
     st.divider()
-    st.markdown("#### 🤖 LLM Engine Settings")
-    
-    # Initialize LLM Client
-    llm_client = LLMClient()
-    is_cfg = llm_client.is_configured()
-
-    provider_choice = st.selectbox("LLM Provider", ["gemini", "openai"], index=0 if llm_client.provider == "gemini" else 1)
-    
-    api_key_input = st.text_input(
-        "API Key (Optional / Overrides Secret)",
-        type="password",
-        value="",
-        placeholder="Enter key to override..."
-    )
-
-    active_key = api_key_input.strip() if api_key_input.strip() else llm_client.api_key
-    active_client = LLMClient(provider=provider_choice, api_key=active_key)
-
-    if active_client.is_configured():
-        st.success(f"🟢 {provider_choice.upper()} Connected ({active_client.model_name})")
-    else:
-        st.info("ℹ️ Running in Deterministic High-Signal AI Mode")
-
-    if st.button("Test LLM Connection", use_container_width=True):
-        with st.spinner("Testing API connection..."):
-            res = active_client.test_connection(key_to_test=active_key, provider=provider_choice)
-            if res.get("success"):
-                st.success(f"Connection OK: {res.get('response')}")
-            else:
-                st.error(f"Failed: {res.get('error')}")
-
-    st.divider()
     st.caption("NextLeap PM Capstone Engine • Strictly Zero Discounts")
+
+# Background LLM Client (uses Secrets / .env automatically)
+active_client = LLMClient()
 
 # ==================== DYNAMIC DATA FILTERING ====================
 allowed_sources = []
