@@ -139,6 +139,60 @@ st.markdown("""
         font-weight: 600;
         color: #94a3b8;
     }
+
+    /* Sidebar Branding & Badges */
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    .sidebar-logo-text {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: #ff3f6c;
+        margin: 0;
+    }
+    .sidebar-subtitle {
+        font-size: 12px;
+        font-weight: 600;
+        color: #64748b;
+        margin-top: -2px;
+        margin-bottom: 10px;
+    }
+    .sidebar-badge-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    .badge-pill-sidebar {
+        background: rgba(255, 63, 108, 0.1);
+        color: #ff3f6c;
+        border: 1px solid rgba(255, 63, 108, 0.25);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        width: fit-content;
+    }
+    .badge-green-sidebar {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        width: fit-content;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -185,9 +239,21 @@ deliverables_md = load_pm_deliverables_markdown()
 
 # ==================== SIDEBAR ====================
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Myntra_logo.png/600px-Myntra_logo.png", width=110)
-    st.markdown("### **VoC Growth Engine**")
-    st.markdown("<span class='badge-green'>✔ 15,000 Records Live</span> <span class='badge-pill'>Zero-Incentive Mode</span>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="sidebar-brand">
+        <div style="background: linear-gradient(135deg, #ff3f6c, #ff527b); color: white; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; box-shadow: 0 2px 6px rgba(255,63,108,0.3);">
+            M
+        </div>
+        <div>
+            <div class="sidebar-logo-text">myntra</div>
+            <div class="sidebar-subtitle">Growth & VoC Engine</div>
+        </div>
+    </div>
+    <div class="sidebar-badge-container">
+        <div class="badge-green-sidebar">✔ 15,000 Records Live</div>
+        <div class="badge-pill-sidebar">🛡️ Zero-Incentive Mode</div>
+    </div>
+    """, unsafe_allow_html=True)
     st.divider()
 
     st.markdown("#### 🎯 Global Context Filters")
