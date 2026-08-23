@@ -759,20 +759,41 @@ with tab_ai:
     if "auto_run_ai" not in st.session_state:
         st.session_state["auto_run_ai"] = False
 
-    preset_col1, preset_col2, preset_col3 = st.columns(3)
-    with preset_col1:
-        if st.button("💡 Why do Gen Z users abandon tops?", use_container_width=True):
+    st.markdown("##### ⚡ Quick Prompt Suggestions (Click to Analyze):")
+    
+    # Row 1 of Presets
+    p1_col1, p1_col2, p1_col3 = st.columns(3)
+    with p1_col1:
+        if st.button("💡 Why Gen Z abandons tops?", use_container_width=True):
             st.session_state["ai_query_input"] = "Based on the 15k VoC corpus, why do Gen Z students hesitate to convert on wishlist tops, and what product feature resolves it?"
             st.session_state["auto_run_ai"] = True
             st.rerun()
-    with preset_col2:
-        if st.button("👗 Analyze Roadster vs Mango sizing", use_container_width=True):
+    with p1_col2:
+        if st.button("👗 Roadster vs Mango sizing variance", use_container_width=True):
             st.session_state["ai_query_input"] = "What are the exact customer complaints regarding sizing discrepancies between Roadster and Mango in our reviews?"
             st.session_state["auto_run_ai"] = True
             st.rerun()
-    with preset_col3:
-        if st.button("✨ How StyleStudio solves Styling Anxiety", use_container_width=True):
+    with p1_col3:
+        if st.button("✨ StyleStudio pairability logic", use_container_width=True):
             st.session_state["ai_query_input"] = "Explain how the StyleStudio Outfit Visualizer solves pairability anxiety without using any discounts or price drops."
+            st.session_state["auto_run_ai"] = True
+            st.rerun()
+
+    # Row 2 of Presets
+    p2_col1, p2_col2, p2_col3 = st.columns(3)
+    with p2_col1:
+        if st.button("🧵 Fabric transparency in Kurtas", use_container_width=True):
+            st.session_state["ai_query_input"] = "What are the biggest fabric transparency and drape doubts for Tier-2 shoppers buying Kurtas?"
+            st.session_state["auto_run_ai"] = True
+            st.rerun()
+    with p2_col2:
+        if st.button("💬 WhatsApp validation loop", use_container_width=True):
+            st.session_state["ai_query_input"] = "How does the offline WhatsApp second-opinion loop cause wishlist stagnation, and how do we solve it in-app?"
+            st.session_state["auto_run_ai"] = True
+            st.rerun()
+    with p2_col3:
+        if st.button("⚖️ Solving comparison paralysis", use_container_width=True):
+            st.session_state["ai_query_input"] = "Why do users bookmark 5+ similar ethnic items and never buy, and what UX tool helps them decide?"
             st.session_state["auto_run_ai"] = True
             st.rerun()
 
