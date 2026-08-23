@@ -39,18 +39,18 @@ st.markdown("""
         color: #201a18;
     }
 
-    /* Top Brand Banner - Warm Editorial Espresso */
+    /* Top Brand Banner - Curvy Editorial */
     .brand-banner {
         background: linear-gradient(135deg, #241c19 0%, #171210 100%);
         color: #fcfbf9;
-        padding: 18px 26px;
-        border-radius: 12px;
-        margin-bottom: 20px;
+        padding: 20px 28px;
+        border-radius: 24px;
+        margin-bottom: 22px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-left: 5px solid #c85a32;
-        box-shadow: 0 6px 20px rgba(36, 28, 25, 0.08);
+        border-left: 6px solid #c85a32;
+        box-shadow: 0 8px 24px rgba(36, 28, 25, 0.08);
     }
     .brand-title {
         font-size: 23px;
@@ -64,8 +64,8 @@ st.markdown("""
     .brand-logo-badge {
         background: linear-gradient(45deg, #c85a32, #e07a5f);
         color: #ffffff;
-        padding: 4px 12px;
-        border-radius: 6px;
+        padding: 6px 14px;
+        border-radius: 12px;
         font-size: 14px;
         font-weight: 800;
         letter-spacing: 0.5px;
@@ -74,37 +74,37 @@ st.markdown("""
         background: rgba(200, 90, 50, 0.18);
         color: #e07a5f;
         border: 1px solid rgba(200, 90, 50, 0.35);
-        padding: 5px 14px;
-        border-radius: 20px;
+        padding: 6px 16px;
+        border-radius: 30px;
         font-size: 12px;
         font-weight: 600;
     }
     .filter-status-banner {
         background: #f3ede4;
         border: 1px solid #e5dcce;
-        border-left: 4px solid #c85a32;
-        padding: 11px 18px;
-        border-radius: 8px;
+        border-left: 5px solid #c85a32;
+        padding: 13px 20px;
+        border-radius: 18px;
         font-size: 13px;
         color: #2b211e;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
-    /* KPI Metric Cards - Warm Ivory & Sandstone */
+    /* KPI Metric Cards - Curvy Sandstone */
     .kpi-card {
         background: #ffffff;
         border: 1px solid #e7dfd4;
-        border-radius: 12px;
-        padding: 18px 20px;
-        box-shadow: 0 3px 10px rgba(40, 30, 25, 0.03);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-radius: 20px;
+        padding: 20px 22px;
+        box-shadow: 0 4px 14px rgba(40, 30, 25, 0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
     .kpi-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(40, 30, 25, 0.07);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 22px rgba(40, 30, 25, 0.08);
         border-color: #d4a373;
     }
     .kpi-label {
@@ -129,22 +129,24 @@ st.markdown("""
         gap: 4px;
     }
 
-    /* Quote Cards */
+    /* Quote Cards - Curvy Bubbles */
     .verbatim-card {
         background: #f7f3ed;
-        border-left: 4px solid #c85a32;
+        border-left: 5px solid #c85a32;
         border-top: 1px solid #eae2d6;
         border-right: 1px solid #eae2d6;
         border-bottom: 1px solid #eae2d6;
-        padding: 14px 18px;
-        border-radius: 0 8px 8px 0;
-        margin-bottom: 12px;
+        padding: 16px 20px;
+        border-radius: 18px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 8px rgba(40, 30, 25, 0.02);
     }
     .verbatim-text {
         font-size: 13.5px;
         font-style: italic;
         color: #2b211e;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        line-height: 1.45;
     }
     .verbatim-meta {
         font-size: 11.5px;
@@ -152,57 +154,57 @@ st.markdown("""
         color: #8c7d73;
     }
 
-    /* Enhanced Tab Navigation */
+    /* Curvy Tab Navigation Pills */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
+        gap: 10px;
         background-color: #efe8df;
-        padding: 6px;
-        border-radius: 12px;
+        padding: 8px;
+        border-radius: 30px;
         border: 1px solid #e2dacd;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
     }
     .stTabs [data-baseweb="tab"] {
         height: 44px;
         white-space: pre-wrap;
         background-color: transparent;
-        border-radius: 8px;
+        border-radius: 24px;
         color: #7d6e65;
         font-size: 13.5px;
         font-weight: 700;
-        padding: 8px 18px;
+        padding: 8px 20px;
         border: none;
         transition: all 0.2s ease;
     }
     .stTabs [data-baseweb="tab"]:hover {
         color: #c85a32;
-        background-color: rgba(255,255,255,0.4);
+        background-color: rgba(255,255,255,0.5);
     }
     .stTabs [aria-selected="true"] {
         background-color: #ffffff !important;
         color: #c85a32 !important;
-        box-shadow: 0 3px 10px rgba(40, 30, 25, 0.08);
+        box-shadow: 0 4px 12px rgba(40, 30, 25, 0.09);
         border: 1px solid #e0d6c8;
     }
 
-    /* Workaround Cards */
+    /* Curvy Workaround Cards */
     .workaround-card {
         background: #ffffff;
         border: 1px solid #e7dfd4;
-        border-radius: 10px;
-        padding: 16px;
+        border-radius: 18px;
+        padding: 18px;
         height: 100%;
-        box-shadow: 0 2px 8px rgba(40,30,25,0.03);
-        transition: transform 0.2s ease;
+        box-shadow: 0 3px 10px rgba(40,30,25,0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .workaround-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 14px rgba(40,30,25,0.06);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(40,30,25,0.07);
     }
     .workaround-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
     .workaround-title {
         font-size: 13.5px;
@@ -212,8 +214,8 @@ st.markdown("""
     .workaround-badge {
         background: #f4ede3;
         color: #c85a32;
-        padding: 2px 8px;
-        border-radius: 12px;
+        padding: 3px 10px;
+        border-radius: 20px;
         font-size: 11px;
         font-weight: 800;
     }
@@ -221,6 +223,32 @@ st.markdown("""
         font-size: 12px;
         color: #6d5e54;
         line-height: 1.45;
+    }
+
+    /* Curvy Streamlit Inputs & Buttons */
+    .stButton > button {
+        border-radius: 24px !important;
+        font-weight: 700 !important;
+        transition: all 0.2s ease !important;
+        padding: 8px 20px !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(200, 90, 50, 0.2) !important;
+    }
+    button[kind="primary"] {
+        border-radius: 28px !important;
+        box-shadow: 0 4px 14px rgba(200, 90, 50, 0.25) !important;
+    }
+    .stTextArea textarea, .stTextInput input, [data-baseweb="select"] {
+        border-radius: 16px !important;
+    }
+    [data-testid="stExpander"] {
+        border-radius: 18px !important;
+        border: 1px solid #e7dfd4 !important;
+        background-color: #ffffff !important;
+        overflow: hidden !important;
+        margin-bottom: 10px !important;
     }
 </style>
 """, unsafe_allow_html=True)
