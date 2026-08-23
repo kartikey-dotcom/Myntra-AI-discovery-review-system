@@ -529,11 +529,12 @@ with tab_overview:
         </div>
         """, unsafe_allow_html=True)
     with col4:
+        top_sol_title = dynamic_matrix[0].get("solution_title", "StyleStudio Lookbook") if dynamic_matrix else "StyleStudio Lookbook"
         st.markdown(f"""
         <div class="kpi-card">
-            <div class="kpi-label">TOP OPPORTUNITY SCORE</div>
-            <div class="kpi-val" style="color: #0d9488;">{top_opp_score:.1f} <span style="font-size: 13px; font-weight: 600;">Score</span></div>
-            <div class="kpi-sub"><span>✨</span> StyleStudio Visualizer MVP</div>
+            <div class="kpi-label">#1 RECOMMENDED SOLUTION</div>
+            <div class="kpi-val" style="color: #0d9488; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
+            <div class="kpi-sub" style="color: #10b981;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
         </div>
         """, unsafe_allow_html=True)
 
