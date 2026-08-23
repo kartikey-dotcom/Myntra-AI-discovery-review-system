@@ -154,36 +154,56 @@ st.markdown("""
         color: #8c7d73;
     }
 
-    /* Curvy Tab Navigation Pills */
+    /* Complete Curvy Floating Tab Navigation */
+    div[data-testid="stTabs"] [data-baseweb="tab-highlight"],
+    div[data-testid="stTabs"] [data-baseweb="tab-border"],
+    .stTabs [data-baseweb="tab-highlight"],
+    .stTabs [data-baseweb="tab-border"] {
+        display: none !important;
+        height: 0px !important;
+        visibility: hidden !important;
+    }
+    div[data-testid="stTabs"] [data-baseweb="tab-list"],
     .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
-        background-color: #efe8df;
-        padding: 8px;
-        border-radius: 30px;
-        border: 1px solid #e2dacd;
-        margin-bottom: 22px;
+        gap: 8px !important;
+        background-color: #efe8df !important;
+        padding: 6px 10px !important;
+        border-radius: 30px !important;
+        border: 1px solid #e2dacd !important;
+        margin-bottom: 22px !important;
+        border-bottom: none !important;
     }
+    div[data-testid="stTabs"] button[role="tab"],
+    div[data-testid="stTabs"] [data-baseweb="tab"],
+    .stTabs button[role="tab"],
     .stTabs [data-baseweb="tab"] {
-        height: 44px;
-        white-space: pre-wrap;
-        background-color: transparent;
-        border-radius: 24px;
-        color: #7d6e65;
-        font-size: 13.5px;
-        font-weight: 700;
-        padding: 8px 20px;
-        border: none;
-        transition: all 0.2s ease;
+        height: 42px !important;
+        white-space: pre-wrap !important;
+        background-color: transparent !important;
+        border-radius: 24px !important;
+        color: #7d6e65 !important;
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        padding: 8px 18px !important;
+        border: none !important;
+        outline: none !important;
+        transition: all 0.2s ease !important;
     }
+    div[data-testid="stTabs"] button[role="tab"]:hover,
     .stTabs [data-baseweb="tab"]:hover {
-        color: #c85a32;
-        background-color: rgba(255,255,255,0.5);
+        color: #c85a32 !important;
+        background-color: rgba(255,255,255,0.5) !important;
+        border-radius: 24px !important;
     }
+    div[data-testid="stTabs"] button[role="tab"][aria-selected="true"],
+    div[data-testid="stTabs"] [data-baseweb="tab"][aria-selected="true"],
     .stTabs [aria-selected="true"] {
         background-color: #ffffff !important;
         color: #c85a32 !important;
-        box-shadow: 0 4px 12px rgba(40, 30, 25, 0.09);
-        border: 1px solid #e0d6c8;
+        border-radius: 24px !important;
+        box-shadow: 0 4px 14px rgba(40, 30, 25, 0.1) !important;
+        border: 1px solid #e0d6c8 !important;
+        border-bottom: 1px solid #e0d6c8 !important;
     }
 
     /* Curvy Workaround Cards */
