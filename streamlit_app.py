@@ -36,21 +36,21 @@ st.markdown("""
     
     html, body, [class*="css"] {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #201a18;
+        color: #1a1615;
     }
 
-    /* Top Brand Banner - Warm Editorial Espresso */
+    /* Top Brand Banner - Royal Emerald & Champagne Silk */
     .brand-banner {
-        background: linear-gradient(135deg, #241c19 0%, #171210 100%);
-        color: #fcfbf9;
+        background: linear-gradient(135deg, #1b4332 0%, #0d2818 100%);
+        color: #fdfbf7;
         padding: 18px 26px;
         border-radius: 12px;
         margin-bottom: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-left: 5px solid #c85a32;
-        box-shadow: 0 6px 20px rgba(36, 28, 25, 0.08);
+        border-left: 5px solid #d4af37;
+        box-shadow: 0 6px 20px rgba(27, 67, 50, 0.15);
     }
     .brand-title {
         font-size: 23px;
@@ -60,57 +60,50 @@ st.markdown("""
         display: flex;
         align-items: center;
         gap: 12px;
+        color: #fdfbf7;
     }
     .brand-logo-badge {
-        background: linear-gradient(45deg, #c85a32, #e07a5f);
-        color: #ffffff;
+        background: linear-gradient(45deg, #d4af37, #f3e5ab);
+        color: #1a1615;
         padding: 4px 12px;
         border-radius: 6px;
         font-size: 14px;
         font-weight: 800;
         letter-spacing: 0.5px;
-    }
-    .badge-pill {
-        background: rgba(200, 90, 50, 0.18);
-        color: #e07a5f;
-        border: 1px solid rgba(200, 90, 50, 0.35);
-        padding: 5px 14px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
     }
     .filter-status-banner {
-        background: #f3ede4;
+        background: #f5f0e6;
         border: 1px solid #e5dcce;
-        border-left: 4px solid #c85a32;
+        border-left: 4px solid #c5a059;
         padding: 11px 18px;
         border-radius: 8px;
         font-size: 13px;
-        color: #2b211e;
+        color: #1a1615;
         margin-bottom: 18px;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
-    /* KPI Metric Cards - Warm Ivory & Sandstone */
+    /* KPI Metric Cards - Ivory Linen & Champagne Accent */
     .kpi-card {
         background: #ffffff;
-        border: 1px solid #e7dfd4;
+        border: 1px solid #e8dfd1;
         border-radius: 12px;
         padding: 18px 20px;
-        box-shadow: 0 3px 10px rgba(40, 30, 25, 0.03);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 3px 10px rgba(27, 67, 50, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
     .kpi-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(40, 30, 25, 0.07);
-        border-color: #d4a373;
+        box-shadow: 0 8px 18px rgba(197, 160, 89, 0.15);
+        border-color: #c5a059;
     }
     .kpi-label {
         font-size: 11px;
         font-weight: 700;
-        color: #7d6e65;
+        color: #8c7b66;
         letter-spacing: 0.8px;
         text-transform: uppercase;
         margin-bottom: 6px;
@@ -118,12 +111,12 @@ st.markdown("""
     .kpi-val {
         font-size: 26px;
         font-weight: 800;
-        color: #201a18;
+        color: #1a1615;
         margin-bottom: 4px;
     }
     .kpi-sub {
         font-size: 12px;
-        color: #7d6e65;
+        color: #8c7b66;
         display: flex;
         align-items: center;
         gap: 4px;
@@ -131,11 +124,11 @@ st.markdown("""
 
     /* Quote Cards */
     .verbatim-card {
-        background: #f7f3ed;
-        border-left: 4px solid #c85a32;
-        border-top: 1px solid #eae2d6;
-        border-right: 1px solid #eae2d6;
-        border-bottom: 1px solid #eae2d6;
+        background: #f8f4ec;
+        border-left: 4px solid #c5a059;
+        border-top: 1px solid #e8dfd1;
+        border-right: 1px solid #e8dfd1;
+        border-bottom: 1px solid #e8dfd1;
         padding: 14px 18px;
         border-radius: 0 8px 8px 0;
         margin-bottom: 12px;
@@ -143,13 +136,13 @@ st.markdown("""
     .verbatim-text {
         font-size: 13.5px;
         font-style: italic;
-        color: #2b211e;
+        color: #1a1615;
         margin-bottom: 6px;
     }
     .verbatim-meta {
         font-size: 11.5px;
         font-weight: 600;
-        color: #8c7d73;
+        color: #8c7b66;
     }
 
     /* Sidebar Branding & Badges */
@@ -163,13 +156,13 @@ st.markdown("""
         font-size: 21px;
         font-weight: 800;
         letter-spacing: -0.5px;
-        color: #c85a32;
+        color: #c5a059;
         margin: 0;
     }
     .sidebar-subtitle {
         font-size: 12px;
         font-weight: 600;
-        color: #7d6e65;
+        color: #8c7b66;
         margin-top: -2px;
         margin-bottom: 10px;
     }
@@ -180,9 +173,9 @@ st.markdown("""
         margin-bottom: 8px;
     }
     .badge-pill-sidebar {
-        background: rgba(200, 90, 50, 0.1);
-        color: #c85a32;
-        border: 1px solid rgba(200, 90, 50, 0.25);
+        background: rgba(197, 160, 89, 0.15);
+        color: #b38728;
+        border: 1px solid rgba(197, 160, 89, 0.35);
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 11.5px;
@@ -193,9 +186,9 @@ st.markdown("""
         width: fit-content;
     }
     .badge-green-sidebar {
-        background: rgba(42, 157, 143, 0.12);
-        color: #2a9d8f;
-        border: 1px solid rgba(42, 157, 143, 0.3);
+        background: rgba(27, 67, 50, 0.12);
+        color: #1b4332;
+        border: 1px solid rgba(27, 67, 50, 0.3);
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 11.5px;
@@ -519,7 +512,7 @@ with tab_overview:
             card1_sub = f"<span>🎯</span> Active <b>{segment_label}</b> Scope"
 
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #c5a059;">
             <div class="kpi-label">{card1_label}</div>
             <div class="kpi-val">{card1_val}</div>
             <div class="kpi-sub">{card1_sub}</div>
@@ -527,27 +520,27 @@ with tab_overview:
         """, unsafe_allow_html=True)
     with col2:
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #1b4332;">
             <div class="kpi-label">GENUINE PURCHASE INTENT</div>
-            <div class="kpi-val" style="color: #10b981;">{genuine_pct}%</div>
+            <div class="kpi-val" style="color: #1b4332;">{genuine_pct}%</div>
             <div class="kpi-sub"><span>🎯</span> High-conviction users</div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #9e2a2b;">
             <div class="kpi-label">#1 ROOT FRICTION</div>
-            <div class="kpi-val" style="color: #ff3f6c; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
+            <div class="kpi-val" style="color: #9e2a2b; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{top_friction_name}</div>
             <div class="kpi-sub"><span>⚠️</span> <b>{top_friction_pct}%</b> of cohort deliberations</div>
         </div>
         """, unsafe_allow_html=True)
     with col4:
         top_sol_title = dynamic_matrix[0].get("solution_title", "StyleStudio Lookbook") if dynamic_matrix else "StyleStudio Lookbook"
         st.markdown(f"""
-        <div class="kpi-card">
+        <div class="kpi-card" style="border-top: 3.5px solid #c5a059;">
             <div class="kpi-label">#1 RECOMMENDED SOLUTION</div>
-            <div class="kpi-val" style="color: #0d9488; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
-            <div class="kpi-sub" style="color: #10b981;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
+            <div class="kpi-val" style="color: #1b4332; font-size: 18px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{top_sol_title}">{top_sol_title}</div>
+            <div class="kpi-sub" style="color: #1b4332;"><span>🚀</span> <b>+43.7%</b> Projected Conviction Lift</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -574,7 +567,7 @@ with tab_overview:
                 orientation="h",
                 text="Percentage",
                 color="Percentage",
-                color_continuous_scale=["#f5ded6", "#c85a32"],
+                color_continuous_scale=["#f3e5ab", "#c5a059", "#1b4332"],
                 title="Wishlist Behavioral Intent Split (%)"
             )
             fig_intent.update_layout(showlegend=False, height=280, margin=dict(l=10, r=10, t=40, b=10))
@@ -596,7 +589,7 @@ with tab_overview:
                 names="Friction",
                 values="Percentage",
                 hole=0.45,
-                color_discrete_sequence=["#c85a32", "#d4a373", "#606c38", "#8d6b94", "#2b211e"],
+                color_discrete_sequence=["#1b4332", "#c5a059", "#2d6a4f", "#8c7b66", "#9e2a2b"],
                 title="Root-Cause Friction Breakdown"
             )
             fig_fric.update_layout(height=280, margin=dict(l=10, r=10, t=40, b=10))
@@ -699,13 +692,13 @@ with tab_matrix:
                 color="Opportunity Score",
                 hover_name="Friction Barrier",
                 text="Friction Barrier",
-                color_continuous_scale=["#e07a5f", "#c85a32"],
+                color_continuous_scale=["#f3e5ab", "#c5a059", "#1b4332"],
                 size_max=32,
                 range_x=[3.4, 5.2],
                 range_y=[3.4, 5.0]
             )
-            fig_quad.add_hline(y=4.2, line_dash="dot", line_color="#d4a373", annotation_text="High Severity (>4.2)")
-            fig_quad.add_vline(x=4.2, line_dash="dot", line_color="#d4a373", annotation_text="High Solvability (>4.2)")
+            fig_quad.add_hline(y=4.2, line_dash="dot", line_color="#c5a059", annotation_text="High Severity (>4.2)")
+            fig_quad.add_vline(x=4.2, line_dash="dot", line_color="#c5a059", annotation_text="High Solvability (>4.2)")
             fig_quad.update_traces(textposition="top center")
             fig_quad.update_layout(height=380, margin=dict(l=20, r=20, t=30, b=20))
             st.plotly_chart(fig_quad, use_container_width=True)
@@ -789,9 +782,9 @@ with tab_insights:
             y="Purchase Probability (%)",
             markers=True,
             title="Wishlist Purchase Intent Decay Over 30 Days",
-            color_discrete_sequence=["#c85a32"]
+            color_discrete_sequence=["#1b4332"]
         )
-        fig_curve.add_vline(x=48, line_dash="dash", line_color="#c85a32", annotation_text="Critical Intercept Window (<48h)")
+        fig_curve.add_vline(x=48, line_dash="dash", line_color="#c5a059", annotation_text="Critical Intercept Window (<48h)")
         st.plotly_chart(fig_curve, use_container_width=True)
 
         st.info("💡 **Key PM Takeaway**: After 48 hours, conviction drops below 30%. Visual & UX product features must trigger inside the initial 24–48 hour window.")
@@ -808,7 +801,7 @@ with tab_insights:
         df_hm,
         text_auto=True,
         aspect="auto",
-        color_continuous_scale=["#faf8f5", "#f4dfd8", "#c85a32"],
+        color_continuous_scale=["#fdfbf7", "#f3e5ab", "#c5a059", "#1b4332"],
         title="Friction Density (%) Across Target User Cohorts"
     )
     fig_hm.update_layout(height=230, margin=dict(l=10, r=10, t=40, b=10))
