@@ -203,7 +203,7 @@ st.markdown("""
 
 # ==================== DATA LOADERS (CACHED) ====================
 @st.cache_data
-def load_classified_corpus():
+def load_classified_corpus(corpus_version: str = "v_20000_records"):
     path = os.path.join(WORKSPACE_ROOT, "data", "classified_corpus_15k.json")
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
@@ -211,7 +211,7 @@ def load_classified_corpus():
     return []
 
 @st.cache_data
-def load_ranked_opportunity_matrix():
+def load_ranked_opportunity_matrix(matrix_version: str = "v_20000_records"):
     path = os.path.join(WORKSPACE_ROOT, "data", "ranked_opportunity_matrix.json")
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
@@ -219,8 +219,8 @@ def load_ranked_opportunity_matrix():
     return []
 
 # Load Full Corpus
-all_classified_records = load_classified_corpus()
-default_ranked_matrix = load_ranked_opportunity_matrix()
+all_classified_records = load_classified_corpus("v_20000_records")
+default_ranked_matrix = load_ranked_opportunity_matrix("v_20000_records")
 
 # ==================== SIDEBAR ====================
 with st.sidebar:
@@ -235,7 +235,7 @@ with st.sidebar:
         </div>
     </div>
     <div class="sidebar-badge-container">
-        <div class="badge-green-sidebar">✔ 15,000 Records Live</div>
+        <div class="badge-green-sidebar">✔ 20,000 Records Live</div>
         <div class="badge-pill-sidebar">🛡️ Zero-Incentive Mode</div>
     </div>
     """, unsafe_allow_html=True)
