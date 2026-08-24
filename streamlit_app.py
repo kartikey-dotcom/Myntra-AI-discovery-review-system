@@ -672,9 +672,21 @@ with tab_matrix:
         st.caption("Bubble Size = Frequency Share (%) • Color Intensity = Opportunity Score")
         
         quad_data = []
+        short_labels = {
+            "Styling And Pairability Anxiety": "Styling Anxiety",
+            "Fit And Silhouette Ambiguity": "Fit & Silhouette",
+            "Fabric And Tactile Doubt": "Fabric Doubt",
+            "Social Validation Lag": "Social Validation",
+            "Occasion Disconnect": "Occasion Disconnect",
+            "Comparison Paralysis": "Comparison Paralysis",
+            "Price Waiting": "Price Speculation"
+        }
         for row in dynamic_matrix:
+            full_title = row.get("friction_name", "").title()
+            short_title = short_labels.get(full_title, full_title)
             quad_data.append({
-                "Friction Barrier": row.get("friction_name", "").title(),
+                "Friction Barrier": full_title,
+                "Short Label": short_title,
                 "Product Solvability (1-5)": row.get("solvability_score", 0),
                 "Severity Score (1-5)": row.get("severity_score", 0),
                 "Frequency Share (%)": row.get("frequency_pct", 0),
@@ -691,16 +703,46 @@ with tab_matrix:
                 size="Frequency Share (%)",
                 color="Opportunity Score",
                 hover_name="Friction Barrier",
-                text="Friction Barrier",
+                text="Short Label",
+                custom_data=["Frequency Share (%)", "Opportunity Score", "Recommended Solution"],
                 color_continuous_scale=["#f3e5ab", "#c5a059", "#1b4332"],
-                size_max=32,
-                range_x=[3.4, 5.2],
-                range_y=[3.4, 5.0]
+                size_max=28,
+                range_x=[2.9, 5.1],
+                range_y=[2.8, 5.3]
             )
-            fig_quad.add_hline(y=4.2, line_dash="dot", line_color="#c5a059", annotation_text="High Severity (>4.2)")
-            fig_quad.add_vline(x=4.2, line_dash="dot", line_color="#c5a059", annotation_text="High Solvability (>4.2)")
-            fig_quad.update_traces(textposition="top center")
-            fig_quad.update_layout(height=380, margin=dict(l=20, r=20, t=30, b=20))
+            # Clean quadrant benchmark reference lines with annotations positioned safely away from bubbles
+            fig_quad.add_hline(
+                y=4.2,
+                line_dash="dash",
+                line_color="rgba(197, 160, 89, 0.6)",
+                line_width=1.5,
+                annotation_text="High Severity (>4.2)",
+                annotation_position="top left",
+                annotation_font=dict(size=10, color="#8c7b66")
+            )
+            fig_quad.add_vline(
+                x=4.2,
+                line_dash="dash",
+                line_color="rgba(197, 160, 89, 0.6)",
+                line_width=1.5,
+                annotation_text="High Solvability (>4.2)",
+                annotation_position="bottom right",
+                annotation_font=dict(size=10, color="#8c7b66")
+            )
+            
+            fig_quad.update_traces(
+                textposition="top center",
+                textfont=dict(size=11, color="#1a1615"),
+                hovertemplate="<b>%{hovertext}</b><br>• Solvability: <b>%{x} / 5.0</b><br>• Severity: <b>%{y} / 5.0</b><br>• Frequency Share: <b>%{customdata[0]:.1f}%</b><br>• Opportunity Score: <b>%{customdata[1]:.1f}</b><br>• Solution: <i>%{customdata[2]}</i><extra></extra>"
+            )
+            fig_quad.update_layout(
+                height=400,
+                margin=dict(l=20, r=20, t=30, b=20),
+                xaxis=dict(title="Product Solvability Score (1-5)", dtick=0.5, gridcolor="#f0eae1"),
+                yaxis=dict(title="Friction Severity Score (1-5)", dtick=0.5, gridcolor="#f0eae1"),
+                plot_bgcolor="#ffffff",
+                paper_bgcolor="#ffffff"
+            )
             st.plotly_chart(fig_quad, use_container_width=True)
 
         st.markdown("#### 📋 Prioritized Opportunity Scoreboard")

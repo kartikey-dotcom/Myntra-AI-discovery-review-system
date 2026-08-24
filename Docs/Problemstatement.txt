@@ -1,0 +1,143 @@
+# SYSTEM DIRECTIVE: Myntra VoC Growth & Discovery Intelligence Engine (15k+ Scale)
+
+## 1. STRATEGIC CONTEXT & NON-NEGOTIABLE CONSTRAINTS
+- **Target Platform:** Myntra (Fashion E-commerce, India).
+- **Core Business Metric:** Increase the 30-Day Wishlist-to-Purchase Conversion Rate (% of users who buy $\ge 1$ item from their wishlist within 30 days of saving).
+- **CRITICAL CONSTRAINT:** NO MONETARY INCENTIVES. The solution space strictly forbids discounts, price-drop alerts, coupons, cashback, or wallet points. 
+- **Analytical Objective:** Ingest, clean, structure, and quantify 15,000+ unstructured user discussions across public channels to isolate the root non-monetary psychological, informational, and visual barriers causing users to stall or abandon saved products.
+
+---
+
+## 2. HIGH-VOLUME INGESTION & FILTERING ARCHITECTURE (15,000+ RECORDS)
+
+### A. Data Ingestion Sources
+1. **App Store & Google Play Store Reviews (Target: ~10,000 records):**
+   - Package: `com.myntra.android` / Apple App ID: `907394059`.
+   - Priority Ratings: 1-star, 2-star, 3-star, and 4-star reviews.
+   - Core Search Tokens: `wishlist`, `saved`, `bag`, `cart`, `hesitate`, `confused`, `fit`, `size`, `material`, `styling`, `pairing`, `color`, `expensive`, `quality`, `return`, `didn't buy`.
+2. **Reddit Indian Fashion Communities (Target: ~3,500 records):**
+   - Subreddits: `r/IndianFashionAddicts`, `r/TwoXIndia`, `r/DesiFragranceAddicts`, `r/IndianSkincareAddicts`, `r/delhi`, `r/bangalore`.
+   - Search Queries: `"Myntra wishlist"`, `"Myntra sizing"`, `"Myntra return"`, `"buying from Myntra"`, `"how to style"`, `"worth buying"`, `"fabric quality Myntra"`.
+3. **YouTube Fashion Content Comments (Target: ~1,500 records):**
+   - Top 50 Myntra Haul, Try-on Review, and "Myntra Hits & Misses" videos.
+
+### B. Preprocessing & Batch Partitioning
+- **Deduplication:** Hash-based deduplication on raw text.
+- **Language Normalization:** Transliterate and normalize Hinglish/slang (e.g., *"kapda kharab hai"*, *"fit sahi nahi baitha"*, *"too pricey for this quality"*).
+- **Price Separation Filter:** Flag and isolate entries that are *purely* price-seeking (e.g., *"waiting for BBD 70% off"*). Track their volume for intent share, but route only non-monetary hesitations into the opportunity matrix.
+
+---
+
+## 3. MULTI-DIMENSIONAL CLASSIFICATION TAXONOMY
+
+For every ingested review/comment, extract and classify across the following 5 dimensions:
+
+### Dimension 1: Wishlist Behavioral Intent
+1. `GENUINE_PURCHASE_INTENT`: High willingness to buy, blocked by specific residual uncertainties (fit, pairing, occasion).
+2. `AESTHETIC_BOOKMARKING`: Using the wishlist as a Pinterest board / aspirational moodboard with zero near-term intent.
+3. `SHORTLIST_COMPARISON`: Holding 3+ similar items (e.g., 4 white oversized shirts) to deliberate between them later.
+4. `PRICE_SPECULATION`: Pure price-drop waiting (isolated per constraint).
+
+### Dimension 2: Non-Monetary Root Uncertainty & Hesitation Vector
+1. `FIT_AND_SILHOUETTE_AMBIGUITY`:
+   - Inconsistent brand sizing (e.g., Roadster M vs. Mango M).
+   - Inability to gauge garment drape on non-model bodies (height, curves, torso length).
+   - Skepticism over studio lighting vs. real-life appearance.
+2. `STYLING_AND_PAIRABILITY_ANXIETY`:
+   - Lack of wardrobe compatibility ("What bottom/shoes do I wear with this?").
+   - Uncertainty if the piece is versatile across multiple occasions or a one-time wear.
+   - Isolation friction (item looks great alone on a mannequin, but hard to assemble into a real look).
+3. `FABRIC_AND_TACTILE_DOUBT`:
+   - Inability to verify material weight, sheer/transparency, breathability, and shrinkage.
+   - Confusing composition labels (e.g., "polyester blend" with no tactile context).
+4. `SOCIAL_VALIDATION_LAG`:
+   - Need for external affirmation (friends, partner, peer community) before committing.
+5. `OCCASION_DISCONNECT`:
+   - Liking an item aesthetically, but lacking an immediate event/reason to justify wearing it.
+6. `COMPARISON_PARALYSIS`:
+   - Fatigue from opening multiple tabs to cross-examine minor spec differences across shortlisted brands.
+
+### Dimension 3: Offline & Cross-Platform Workarounds
+Extract external actions users take to resolve hesitation:
+1. `WHATSAPP_PEER_VALIDATION`: Screenshotting and sharing to group chats for opinions.
+2. `YOUTUBE_TRYON_SEARCH`: Searching third-party video creators to see real fabric movement and fit.
+3. `CANVA_PINTEREST_COLLAGING`: Manually creating moodboards to see if an item matches their wardrobe.
+4. `BRACKETING_AS_WORKAROUND`: Intentionally buying 2 sizes with the premeditated plan to return one.
+
+### Dimension 4: User Cohort & Category Segmentation
+- **User Segment:**
+  - `STUDENT_GEN_Z` (High trend awareness, social-validation heavy, tight budget).
+  - `WORKING_PROFESSIONAL` (Time-poor, versatility/capsule focused, high intent on fit consistency).
+  - `TIER_2_ASPIRATIONAL` (High brand-authenticity and fabric-durability skepticism).
+- **Product Category:**
+  - `WESTERN_CASUAL`, `WESTERN_FORMAL_WORKWEAR`, `ETHNIC_OCCASION`, `FOOTWEAR`, `STREETWEAR`.
+
+---
+
+## 4. QUANTIFICATION & OPPORTUNITY SCORING ALGORITHM
+
+Aggregate the 15,000+ records and calculate the prioritized opportunity score for each friction vector:
+
+$$\text{Opportunity Score} = \text{Frequency Share (\%)} \times \text{Severity (1–5)} \times \text{Non-Monetary Solvability (1–5)}$$
+
+- **Frequency Share (%):** $\frac{\text{Mentions of Friction } X}{\text{Total Analyzed Non-Monetary Mentions}} \times 100$
+- **Friction Severity (1–5):** Degree to which this friction completely terminates the purchase decision ($1 = \text{minor delay}$, $5 = \text{permanent drop-off/abandonment}$).
+- **Non-Monetary Solvability (1–5):** Feasibility of resolving this uncertainty purely through UI/UX, AI vision, social proof, or workflow interventions ($1 = \text{requires physical touch/price cut}$, $5 = \text{fully solvable digitally}$).
+
+---
+
+## 5. REQUIRED JSON OUTPUT SCHEMA
+
+Antigravity must output the final synthesis strictly conforming to this schema:
+
+```json
+{
+  "corpus_metadata": {
+    "total_records_ingested": 15000,
+    "valid_fashion_discussions_filtered": 0,
+    "sources_breakdown": {
+      "google_play_store": 0,
+      "reddit_threads": 0,
+      "youtube_comments": 0
+    }
+  },
+  "intent_distribution_pct": {
+    "genuine_purchase_intent": 0.0,
+    "aesthetic_bookmarking": 0.0,
+    "shortlist_comparison": 0.0,
+    "pure_price_speculation": 0.0
+  },
+  "friction_clusters_ranking": [
+    {
+      "rank": 1,
+      "cluster_id": "STRING_ID",
+      "cluster_name": "Human-Readable Cluster Name",
+      "frequency_share_pct": 0.0,
+      "severity_score_1_to_5": 0,
+      "non_monetary_solvability_score_1_to_5": 0,
+      "opportunity_score": 0.0,
+      "primary_user_segments_affected": ["STRING"],
+      "top_affected_categories": ["STRING"],
+      "core_unmet_need": "Detailed explanation of what information or experience is missing",
+      "observed_offline_workarounds": ["STRING"],
+      "verbatim_evidence": [
+        {
+          "source": "Reddit | PlayStore | YouTube",
+          "context": "Category / Brand context",
+          "quote": "Exact user verbatim quote illustrating the friction"
+        }
+      ],
+      "conversion_dropoff_mechanism": "Step-by-step breakdown of how this friction stalls the 30-day conversion"
+    }
+  ],
+  "cross_segment_insights": {
+    "gen_z_vs_working_professionals": "Comparative insight",
+    "western_vs_ethnic_wear": "Comparative insight"
+  },
+  "final_problem_recommendation": {
+    "selected_target_segment": "STRING",
+    "selected_friction_cluster": "STRING",
+    "strategic_rationale": "Why solving this non-monetary problem maximizes the 30-day conversion metric with highest conviction",
+    "hypothesized_product_intervention_vector": "High-level direction for MVP (e.g., Dynamic Wardrobe Outfit Visualizer)"
+  }
+}
