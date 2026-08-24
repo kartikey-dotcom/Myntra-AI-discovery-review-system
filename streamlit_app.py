@@ -706,40 +706,113 @@ with tab_matrix:
                 text="Short Label",
                 custom_data=["Frequency Share (%)", "Opportunity Score", "Recommended Solution"],
                 color_continuous_scale=["#f3e5ab", "#c5a059", "#1b4332"],
-                size_max=28,
-                range_x=[2.9, 5.1],
-                range_y=[2.8, 5.3]
+                size_max=30,
+                range_x=[2.8, 5.2],
+                range_y=[2.6, 5.3]
             )
-            # Clean quadrant benchmark reference lines with annotations positioned safely away from bubbles
-            fig_quad.add_hline(
-                y=4.2,
-                line_dash="dash",
-                line_color="rgba(197, 160, 89, 0.6)",
-                line_width=1.5,
-                annotation_text="High Severity (>4.2)",
-                annotation_position="top left",
-                annotation_font=dict(size=10, color="#8c7b66")
+
+            # 4 Shaded Quadrant Background Zones
+            shapes = [
+                # Top-Right: Priority 1 Target Zone (High Severity & Solvability) - Soft Emerald Green
+                dict(
+                    type="rect",
+                    x0=4.2, x1=5.2, y0=4.2, y1=5.3,
+                    fillcolor="rgba(27, 67, 50, 0.09)",
+                    line=dict(width=0),
+                    layer="below"
+                ),
+                # Top-Left: Quadrant 2 (High Severity / Complex) - Soft Orange/Amber
+                dict(
+                    type="rect",
+                    x0=2.8, x1=4.2, y0=4.2, y1=5.3,
+                    fillcolor="rgba(234, 88, 12, 0.04)",
+                    line=dict(width=0),
+                    layer="below"
+                ),
+                # Bottom-Right: Quadrant 3 (High Solvability / Moderate Severity) - Soft Gold
+                dict(
+                    type="rect",
+                    x0=4.2, x1=5.2, y0=2.6, y1=4.2,
+                    fillcolor="rgba(202, 138, 4, 0.04)",
+                    line=dict(width=0),
+                    layer="below"
+                ),
+                # Bottom-Left: Quadrant 4 (Secondary / Lower Urgency) - Soft Slate Grey
+                dict(
+                    type="rect",
+                    x0=2.8, x1=4.2, y0=2.6, y1=4.2,
+                    fillcolor="rgba(100, 116, 139, 0.03)",
+                    line=dict(width=0),
+                    layer="below"
+                ),
+            ]
+
+            # Benchmark Divider Lines (dotted champagne gold)
+            fig_quad.add_hline(y=4.2, line_dash="dot", line_color="rgba(197, 160, 89, 0.7)", line_width=1.5)
+            fig_quad.add_vline(x=4.2, line_dash="dot", line_color="rgba(197, 160, 89, 0.7)", line_width=1.5)
+
+            # Clear, non-overlapping quadrant corner zone badges
+            fig_quad.add_annotation(
+                x=5.15, y=5.22,
+                text="🎯 <b>PRIORITY 1: Target Focus Zone</b><br><span style='font-size:9.5px;color:#2d6a4f;'>High Severity & High Solvability (>4.2)</span>",
+                showarrow=False,
+                xanchor="right",
+                yanchor="top",
+                font=dict(size=10, color="#1b4332"),
+                bgcolor="rgba(255, 255, 255, 0.92)",
+                bordercolor="rgba(27, 67, 50, 0.35)",
+                borderwidth=1.2,
+                borderpad=5
             )
-            fig_quad.add_vline(
-                x=4.2,
-                line_dash="dash",
-                line_color="rgba(197, 160, 89, 0.6)",
-                line_width=1.5,
-                annotation_text="High Solvability (>4.2)",
-                annotation_position="bottom right",
-                annotation_font=dict(size=10, color="#8c7b66")
+            fig_quad.add_annotation(
+                x=2.85, y=5.22,
+                text="⚠️ <b>QUADRANT 2: High Severity</b><br><span style='font-size:9.5px;color:#9a3412;'>Requires Complex Interventions</span>",
+                showarrow=False,
+                xanchor="left",
+                yanchor="top",
+                font=dict(size=9.5, color="#9a3412"),
+                bgcolor="rgba(255, 255, 255, 0.85)",
+                bordercolor="rgba(234, 88, 12, 0.25)",
+                borderwidth=1,
+                borderpad=4
             )
-            
+            fig_quad.add_annotation(
+                x=5.15, y=2.68,
+                text="🛠️ <b>QUADRANT 3: Quick Wins</b><br><span style='font-size:9.5px;color:#854d0e;'>High Solvability / Lower Friction</span>",
+                showarrow=False,
+                xanchor="right",
+                yanchor="bottom",
+                font=dict(size=9.5, color="#854d0e"),
+                bgcolor="rgba(255, 255, 255, 0.85)",
+                bordercolor="rgba(202, 138, 4, 0.25)",
+                borderwidth=1,
+                borderpad=4
+            )
+            fig_quad.add_annotation(
+                x=2.85, y=2.68,
+                text="⏳ <b>QUADRANT 4: Secondary</b><br><span style='font-size:9.5px;color:#64748b;'>Lower Urgency Deliberations</span>",
+                showarrow=False,
+                xanchor="left",
+                yanchor="bottom",
+                font=dict(size=9.5, color="#475569"),
+                bgcolor="rgba(255, 255, 255, 0.85)",
+                bordercolor="rgba(100, 116, 139, 0.25)",
+                borderwidth=1,
+                borderpad=4
+            )
+
             fig_quad.update_traces(
                 textposition="top center",
                 textfont=dict(size=11, color="#1a1615"),
+                marker=dict(line=dict(width=1.5, color="#ffffff")),
                 hovertemplate="<b>%{hovertext}</b><br>• Solvability: <b>%{x} / 5.0</b><br>• Severity: <b>%{y} / 5.0</b><br>• Frequency Share: <b>%{customdata[0]:.1f}%</b><br>• Opportunity Score: <b>%{customdata[1]:.1f}</b><br>• Solution: <i>%{customdata[2]}</i><extra></extra>"
             )
             fig_quad.update_layout(
-                height=400,
+                height=430,
+                shapes=shapes,
                 margin=dict(l=20, r=20, t=30, b=20),
-                xaxis=dict(title="Product Solvability Score (1-5)", dtick=0.5, gridcolor="#f0eae1"),
-                yaxis=dict(title="Friction Severity Score (1-5)", dtick=0.5, gridcolor="#f0eae1"),
+                xaxis=dict(title="Product Solvability Score (1-5)", dtick=0.5, gridcolor="rgba(0,0,0,0.05)", zeroline=False),
+                yaxis=dict(title="Friction Severity Score (1-5)", dtick=0.5, gridcolor="rgba(0,0,0,0.05)", zeroline=False),
                 plot_bgcolor="#ffffff",
                 paper_bgcolor="#ffffff"
             )
